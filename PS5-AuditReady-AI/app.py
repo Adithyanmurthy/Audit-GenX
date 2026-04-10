@@ -320,13 +320,15 @@ def api_clear():
 
 if __name__ == "__main__":
     import socket
-    port = 5001
-    while port < 5100:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            if s.connect_ex(('127.0.0.1', port)) != 0:
-                break
-        port += 1
+    port = int(os.environ.get("PORT", 5001))
+    # If not on Render (no PORT env), find a free port
+    if "PORT" not in os.environ:
+        while port < 5100:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                if s.connect_ex(('127.0.0.1', port)) != 0:
+                    break
+            port += 1
     print(f"\n  Audit GenX — Claim Intelligence Platform")
     print(f"  By Team Frame Flux")
     print(f"  Open http://127.0.0.1:{port} in your browser\n")
-    app.run(debug=False, port=port)
+    app.run(host="0.0.0.0", debug=False, port=port)

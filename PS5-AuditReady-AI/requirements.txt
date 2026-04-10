@@ -1,0 +1,5 @@
+flask
+pypdf
+python-docx
+Pillow
+gunicorn
