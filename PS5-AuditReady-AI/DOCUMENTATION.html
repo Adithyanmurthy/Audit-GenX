@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Audit GenX — Documentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#fafafa;color:#111827;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:48px 24px 80px}
+h1{font-size:2.2em;font-weight:300;letter-spacing:-0.03em;margin:0 0 8px;color:#111}
+h2{font-size:1.5em;font-weight:300;letter-spacing:-0.02em;margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e7eb;color:#111}
+h3{font-size:1.1em;font-weight:600;margin:28px 0 8px;color:#1a1a1a}
+p{margin:8px 0;font-size:15px;color:#374151}
+strong{font-weight:600;color:#111}
+hr{border:none;border-top:1px solid #e5e7eb;margin:32px 0}
+ul{margin:8px 0 8px 24px}
+li{margin:4px 0;font-size:15px;color:#374151}
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:#f3f4f6;padding:10px 14px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;font-weight:600;border-bottom:2px solid #e5e7eb}
+td{padding:10px 14px;border-bottom:1px solid #f3f4f6;color:#374151}
+tr:hover td{background:#fafafa}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:20px;overflow-x:auto;margin:16px 0;font-size:13px;line-height:1.6}
+code.inline{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:13px;color:#4338ca}
+.badge{display:inline-block;padding:4px 12px;border-radius:4px;font-size:12px;font-weight:600;margin-right:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Audit GenX — Insurance Claim Intelligence Platform</h1>
+
+<p><strong>AI Build Sprint — Problem Statement 5: Explainable + Traceable AI</strong></p>
+<p><strong>By Team Frame Flux</strong></p>
+
+<hr>
+
+<h2>Problem Space</h2>
+
+<h3>The Crisis in Insurance Claim Processing</h3>
+
+<p>The Indian insurance industry processes over <strong>3 crore claims annually</strong>, yet the process remains fundamentally broken:</p>
+
+<ul>
+<li>**72% of insurance fraud goes undetected** because manual reviewers cannot consistently apply complex rule sets across thousands of claims</li>
+<li>**Average processing time is 45 minutes per claim** — a single claims officer handles 15–20 claims per day, creating massive backlogs</li>
+<li>**Zero audit trail** — when regulators like IRDAI ask "why was this claim approved?", there is no structured reasoning to show</li>
+<li>**Inconsistent decisions** — the same claim reviewed by two different officers often gets two different outcomes</li>
+<li>**Fraud costs the industry ₹80,000+ crore annually** — inflated claims, staged accidents, missing document fraud, and repeat claimants slip through manual review</li>
+</ul>
+
+<h3>Who Suffers?</h3>
+
+<div class="table-wrap"><table>
+<tr><th>Stakeholder</th><th>Pain Point</th></tr>
+<tr><td>Insurance Companies</td><td>Fraudulent payouts, regulatory penalties, operational costs</td></tr>
+<tr><td>Claims Officers</td><td>Overwhelmed with volume, no decision support tools</td></tr>
+<tr><td>Policyholders</td><td>Slow processing, inconsistent outcomes, lack of transparency</td></tr>
+<tr><td>Regulators (IRDAI)</td><td>No audit trails, no explainability, no traceability</td></tr>
+</table></div>
+
+<hr>
+
+<h2>Solution Approach</h2>
+
+<h3>Core Philosophy: Every Decision Must Be Explainable</h3>
+
+<p>Audit GenX is not a black-box AI. It is a <strong>14-stage transparent pipeline</strong> where every single decision is:</p>
+
+<p>1. <strong>Explainable</strong> — each stage produces human-readable reasoning</p>
+<p>2. <strong>Traceable</strong> — every output links back to a specific rule, config, or input field</p>
+<p>3. <strong>Auditable</strong> — the complete trail can be presented to regulators as-is</p>
+<p>4. <strong>Config-driven</strong> — all business logic lives in JSON, not hardcoded</p>
+
+<h3>Architecture</h3>
+
+<pre><code class="">
+                    ┌─────────────────────────────────────────┐
+                    │           Audit GenX Platform            │
+                    ├─────────────────────────────────────────┤
+                    │                                         │
+  Claim Input ──────►  14-Stage AI Pipeline                   │
+  (Form / Document) │  ┌──────────────────────────────────┐  │
+                    │  │ 1. Input Validation               │  │
+                    │  │ 2. Document Verification          │  │
+                    │  │ 3. Claim Analysis                 │  │
+                    │  │ 4. Damage Assessment              │  │
+                    │  │ 5. Coverage Validation            │  │
+                    │  │ 6. Policy Limit Check             │  │
+                    │  │ 7. History Check                  │  │
+                    │  │ 8. Fraud Detection (8 indicators) │  │
+                    │  │ 9. Consistency Cross-Check        │  │
+                    │  │ 10. Risk Scoring (6-factor)       │  │
+                    │  │ 11. Decision Generation           │  │
+                    │  │ 12. Payout Estimation             │  │
+                    │  │ 13. Recommendation Engine         │  │
+                    │  │ 14. Audit Verification            │  │
+                    │  └──────────────────────────────────┘  │
+                    │                                         │
+                    │  Output:                                │
+                    │  ✓ Decision (Approved/Rejected/Pending) │
+                    │  ✓ Full 14-step audit trail             │
+                    │  ✓ Confidence scores per stage          │
+                    │  ✓ Payout estimation                    │
+                    │  ✓ Recommended actions                  │
+                    └─────────────────────────────────────────┘
+                                      │
+                              ┌───────┴───────┐
+                              │ Config Layer  │
+                              │ (JSON rules)  │
+                              └───────────────┘
+                              Coverage rules
+                              Fraud thresholds
+                              Damage keywords
+                              Risk weights
+                              Policy limits
+</code></pre>
+
+<hr>
+
+<h2>The 14-Stage Pipeline — In Detail</h2>
+
+<h3>Stage 1: Input Validation</h3>
+<p>Validates all 12 input fields — checks types, ranges, required fields. Catches empty descriptions, invalid amounts, missing dates.</p>
+
+<h3>Stage 2: Document Verification</h3>
+<p>Checks each of the 6 required documents individually: FIR/Police Report, Driving License, Vehicle Registration (RC), Insurance Policy Copy, Claim Form (signed), Repair Estimate/Bill. Reports completeness percentage and lists missing documents.</p>
+
+<h3>Stage 3: Claim Analysis</h3>
+<p>Reads the incident description and classifies the incident type using keyword matching: collision, single-vehicle, theft, fire, natural disaster, vandalism, or hit-and-run.</p>
+
+<h3>Stage 4: Damage Assessment</h3>
+<p>Classifies damage severity as minor, moderate, or major using keyword frequency matching. Cross-checks the claim amount against typical repair cost ranges for that damage level.</p>
+
+<h3>Stage 5: Coverage Validation</h3>
+<p>Checks if the policy type (Comprehensive vs Third-Party) covers the claimed damage. Also checks for exclusions — drunk driving, racing, commercial use, war, nuclear events.</p>
+
+<h3>Stage 6: Policy Limit Check</h3>
+<p>Verifies the claim amount doesn't exceed the policy's maximum coverage limit (₹10,00,000 for Comprehensive, ₹5,00,000 for Third-Party).</p>
+
+<h3>Stage 7: History Check</h3>
+<p>Examines the claimant's history: total past claims vs threshold, claims filed this year, and whether the policy was purchased suspiciously recently (within 30 days of incident).</p>
+
+<h3>Stage 8: Fraud Detection</h3>
+<p>Runs 8 weighted fraud indicators:</p>
+
+<div class="table-wrap"><table>
+<tr><th>Indicator</th><th>Weight</th><th>What It Catches</th></tr>
+<tr><td>Past claims exceeded</td><td>25/100</td><td>Repeat claimants (>3 lifetime)</td></tr>
+<tr><td>High claim for minor damage</td><td>20/100</td><td>Inflated claims (>₹25,000 for minor)</td></tr>
+<tr><td>Claim vs vehicle value</td><td>20/100</td><td>Claim >80% of car value</td></tr>
+<tr><td>Missing documents</td><td>15/100</td><td>Incomplete evidence</td></tr>
+<tr><td>Multiple claims same year</td><td>15/100</td><td>Suspicious frequency (2+/year)</td></tr>
+<tr><td>Exclusion keywords</td><td>15/100</td><td>Drunk driving, racing in description</td></tr>
+<tr><td>Late reporting</td><td>10/100</td><td>Reported 30+ days after incident</td></tr>
+<tr><td>Amount outside range</td><td>10/100</td><td>Doesn't match damage level</td></tr>
+</table></div>
+
+<p>Total score ≥40 = High Risk, ≥20 = Medium Risk, <20 = Low Risk.</p>
+
+<h3>Stage 9: Consistency Cross-Check</h3>
+<p>Cross-verifies that the claim amount matches the damage level's typical repair range, and that the incident type is covered by the policy type.</p>
+
+<h3>Stage 10: Risk Scoring</h3>
+<p>Combines 6 weighted factors into an overall risk score (0–100):</p>
+
+<div class="table-wrap"><table>
+<tr><th>Factor</th><th>Weight</th></tr>
+<tr><td>Fraud risk</td><td>30%</td></tr>
+<tr><td>Claim amount reasonableness</td><td>20%</td></tr>
+<tr><td>Document completeness</td><td>15%</td></tr>
+<tr><td>Description consistency</td><td>15%</td></tr>
+<tr><td>Claim history</td><td>10%</td></tr>
+<tr><td>Reporting timeliness</td><td>10%</td></tr>
+</table></div>
+
+<h3>Stage 11: Decision Generation</h3>
+<p>Makes the final call based on all prior stages:</p>
+<ul>
+<li>**Approved** — covered, documents complete, no fraud, low risk</li>
+<li>**Rejected** — not covered by policy, or exclusion triggered</li>
+<li>**Pending** — high fraud risk, missing documents, or high overall risk (requires manual review)</li>
+</ul>
+
+<h3>Stage 12: Payout Estimation</h3>
+<p>Calculates estimated payout based on damage level payout percentages minus the policy deductible:</p>
+<ul>
+<li>Minor: 70–90% payout range</li>
+<li>Moderate: 50–70% payout range</li>
+<li>Major: 30–50% payout range</li>
+</ul>
+
+<h3>Stage 13: Recommendation Engine</h3>
+<p>Generates actionable next steps for the claims officer:</p>
+<ul>
+<li>Approved: process payout, notify policyholder, archive with audit trail</li>
+<li>Rejected: send rejection letter with appeal instructions</li>
+<li>Pending: assign to SIU, request missing documents, set deadlines</li>
+</ul>
+
+<h3>Stage 14: Audit Verification</h3>
+<p>The final safeguard — checks for contradictions across all 13 prior stages:</p>
+<ul>
+<li>If coverage says "not covered" but decision is not "Rejected" → contradiction</li>
+<li>If fraud risk is "high" but decision is "Approved" → contradiction</li>
+<li>If covered + low fraud but decision is "Rejected" → contradiction</li>
+</ul>
+
+<p>Produces a traceability map linking every stage's confidence and source.</p>
+
+<hr>
+
+<h2>Features</h2>
+
+<h3>1. Real-Time Pipeline Visualization</h3>
+<p>Watch all 14 stages execute live with an n8n-style node graph. Each node lights up as it processes, with SVG bezier curve connections showing data flow. A terminal log shows reasoning in real time.</p>
+
+<h3>2. Document Upload and Auto-Extraction</h3>
+<p>Upload PDF, DOCX, images, or text files. The system extracts text using pypdf/python-docx/pytesseract, then auto-detects claim fields (amount, policy type, vehicle value, description, dates) using regex pattern matching. Supports Indian number formats (₹8,00,000).</p>
+
+<h3>3. Claim Submission Form</h3>
+<p>12-field form with document checkboxes. Load sample claims with one click, or process all 7 test claims at once for demo purposes.</p>
+
+<h3>4. Full Audit Trail</h3>
+<p>Every claim produces a 14-row audit table showing: stage name, reasoning, confidence score (HIGH/MED/LOW), and data source. This is the core deliverable — the complete, structured, auditable decision trail.</p>
+
+<h3>5. Dashboard with Analytics</h3>
+<p>Stats overview (total/approved/rejected/pending/audit consistency), clickable claim list, clear-all functionality. All data persists to disk.</p>
+
+<h3>6. Config-Driven Business Rules</h3>
+<p>All logic lives in <code class="inline">configs/policy_rules.json</code>:</p>
+<ul>
+<li>Coverage rules (what each policy covers)</li>
+<li>Exclusions (drunk driving, racing, etc.)</li>
+<li>Required documents list</li>
+<li>Fraud indicator thresholds and weights</li>
+<li>Damage classification keywords and repair ranges</li>
+<li>Risk score factor weights</li>
+<li>Confidence thresholds</li>
+</ul>
+
+<p>Change the JSON → change the behavior. No code changes needed. Different insurance companies can have completely different rules.</p>
+
+<h3>7. Streaming SSE Pipeline</h3>
+<p>Server-Sent Events endpoint streams each stage result as it completes, enabling the real-time visualization. 0.3s delay between stages for visual effect.</p>
+
+<h3>8. Data Persistence</h3>
+<p>All processed claims are saved to <code class="inline">output/results.json</code> on disk. Data survives server restarts and persists after deployment.</p>
+
+<hr>
+
+<h2>Technology Stack</h2>
+
+<div class="table-wrap"><table>
+<tr><th>Layer</th><th>Technology</th></tr>
+<tr><td>Backend</td><td>Python, Flask</td></tr>
+<tr><td>Frontend</td><td>HTML, CSS, JavaScript (single-page app)</td></tr>
+<tr><td>AI Engine</td><td>Rule-based 14-stage pipeline with weighted scoring</td></tr>
+<tr><td>Document Processing</td><td>pypdf, python-docx, Pillow, pytesseract</td></tr>
+<tr><td>Data Format</td><td>JSON (config, claims, results)</td></tr>
+<tr><td>Real-Time</td><td>Server-Sent Events (SSE)</td></tr>
+<tr><td>Visualization</td><td>SVG bezier curves, CSS animations</td></tr>
+</table></div>
+
+<hr>
+
+<h2>Test Claims — 7 Edge Cases</h2>
+
+<div class="table-wrap"><table>
+<tr><th>Claim</th><th>Scenario</th><th>Result</th><th>Why</th></tr>
+<tr><td>C1</td><td>Third-Party policy, own damage</td><td>Rejected</td><td>Policy doesn't cover own vehicle damage</td></tr>
+<tr><td>C2</td><td>Comprehensive, moderate collision</td><td>Approved</td><td>Covered, clean record, all docs</td></tr>
+<tr><td>C3</td><td>Minor scratch, ₹75K claim, 5 past claims, missing docs</td><td>Pending</td><td>High fraud risk (score 72/100)</td></tr>
+<tr><td>C4</td><td>Vehicle fire, total loss, Comprehensive</td><td>Approved</td><td>Covered, clean record, major damage</td></tr>
+<tr><td>C5</td><td>Third-Party, hit-and-run, own damage</td><td>Rejected</td><td>Policy doesn't cover own damage</td></tr>
+<tr><td>C6</td><td>Comprehensive, missing 2 documents</td><td>Pending</td><td>Cannot finalize without documentation</td></tr>
+<tr><td>C7</td><td>Flood damage, Comprehensive, clean</td><td>Approved</td><td>Covered, clean record, major damage</td></tr>
+</table></div>
+
+<hr>
+
+<h2>What Makes This Different</h2>
+
+<div class="table-wrap"><table>
+<tr><th>Traditional Approach</th><th>Audit GenX</th></tr>
+<tr><td>Manual review, 45 min/claim</td><td>Automated, <1 second</td></tr>
+<tr><td>No audit trail</td><td>14-stage structured trail</td></tr>
+<tr><td>3 basic checks</td><td>14 verification stages</td></tr>
+<tr><td>Binary fraud flag</td><td>8 weighted indicators, score 0–100</td></tr>
+<tr><td>Hardcoded rules</td><td>Config-driven JSON</td></tr>
+<tr><td>No explainability</td><td>Reasoning + confidence + source at every step</td></tr>
+<tr><td>No real-time visibility</td><td>Live pipeline visualization</td></tr>
+<tr><td>No payout estimation</td><td>Damage-based payout calculation</td></tr>
+<tr><td>No recommendations</td><td>Actionable next steps for officers</td></tr>
+</table></div>
+
+<hr>
+
+<h2>How to Run</h2>
+
+<pre><code class="bash">
+cd PS5-AuditReady-AI
+python3 app.py
+</code></pre>
+
+<p>Open the URL printed in the terminal. Submit a claim and watch the 14-stage pipeline execute in real time.</p>
+
+<hr>
+
+<h2>Project Structure</h2>
+
+<pre><code class="">
+PS5-AuditReady-AI/
+├── app.py                     — Flask backend (API + SSE streaming + frontend)
+├── audit_decision_system.py   — 14-stage processing engine
+├── configs/
+│   └── policy_rules.json      — All business rules (config-driven)
+├── data/
+│   └── claims.json            — 7 test claims with 12 fields each
+├── templates/
+│   └── index.html             — Professional SaaS frontend
+├── uploads/                   — Uploaded documents
+└── output/
+    └── results.json           — Processed results (persisted)
+</code></pre>
+
+<hr>
+
+<p><strong>Built by Team Frame Flux</strong></p>
+<p><strong>AI Build Sprint — Problem Statement 5</strong></p>
+
+</div>
+</body>
+</html>

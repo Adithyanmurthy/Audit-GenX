@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Audit GenX — Claim Intelligence Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafafa;--card:#fff;--primary:#4338ca;--primary-l:#eef2ff;--primary-t:#6366f1;--green:#059669;--green-l:#ecfdf5;--green-b:#d1fae5;--red:#dc2626;--red-l:#fef2f2;--amber:#d97706;--amber-l:#fffbeb;--text:#111827;--text2:#374151;--text3:#6b7280;--text4:#9ca3af;--border:#e5e7eb;--border2:#f3f4f6;--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.03)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;font-size:14px;font-weight:400;letter-spacing:-0.01em}
+h1,h2,h3{font-weight:300;letter-spacing:-0.02em}
+
+/* NAV */
+.nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:56px;gap:32px}
+.nav-brand{font-weight:800;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px;letter-spacing:-.3px}
+.nav-brand .mark{width:24px;height:24px;background:var(--primary);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800}
+.nav-links{display:flex;gap:4px;flex:1}
+.nav-links a{padding:8px 14px;border-radius:6px;font-size:.85em;font-weight:500;color:var(--text3);text-decoration:none;transition:.12s;cursor:pointer}
+.nav-links a:hover{background:var(--border2);color:var(--text)}
+.nav-links a.on{background:var(--primary-l);color:var(--primary)}
+.nav-right{font-size:.75em;color:var(--text4)}
+
+/* LAYOUT */
+.wrap{max-width:1200px;margin:0 auto;padding:24px}
+.section{display:none}.section.on{display:block}
+
+/* HERO */
+.hero{text-align:center;padding:48px 0 40px}
+.hero h1{font-size:2.2em;font-weight:800;letter-spacing:-.5px;line-height:1.2}
+.hero h1 span{color:var(--primary)}
+.hero p{color:var(--text3);font-size:1.05em;margin-top:10px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* FEATURE GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.feat-card:hover{border-color:var(--primary-t);box-shadow:0 4px 12px rgba(99,102,241,.1);transform:translateY(-2px)}
+.feat-card .fc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;color:#fff;margin-bottom:14px}
+.feat-card h3{font-size:.95em;font-weight:700;margin-bottom:6px}
+.feat-card p{font-size:.82em;color:var(--text3);line-height:1.5}
+.feat-card .fc-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--text4);font-size:1.2em;transition:.2s}
+.feat-card:hover .fc-arrow{color:var(--primary);right:12px}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center}
+.card-h h2{font-size:.95em;font-weight:700}
+.card-b{padding:20px}
+
+/* BUTTONS */
+.btn{padding:8px 18px;border:none;border-radius:6px;font-size:.84em;font-weight:600;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.btn-p{background:var(--primary);color:#fff}.btn-p:hover{background:#3730a3}
+.btn-g{background:var(--border2);color:var(--text2);border:1px solid var(--border)}.btn-g:hover{background:var(--border)}
+.btn-d{background:var(--red-l);color:var(--red)}.btn-d:hover{background:#fee2e2}
+.btn-sm{padding:5px 12px;font-size:.8em}
+.back-link{font-size:.85em;color:var(--text3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:16px;font-weight:500}
+.back-link:hover{color:var(--primary)}
+
+/* FORM */
+.fg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.fi{display:flex;flex-direction:column;gap:4px}
+.fi.s2{grid-column:span 2}.fi.s3{grid-column:span 3}
+.fl{font-size:.72em;font-weight:600;color:var(--text4);text-transform:uppercase;letter-spacing:.6px}
+.fx{padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:.88em;transition:.12s;background:#fff;color:var(--text);font-family:inherit}
+.fx:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.08)}
+textarea.fx{resize:vertical;min-height:60px}
+select.fx{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%239ca3af' d='M5 7L1 3h8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.dc{display:flex;align-items:center;gap:7px;font-size:.82em;padding:6px 10px;border-radius:5px;border:1px solid var(--border2);cursor:pointer}
+.dc:hover{background:var(--border2)}
+.dc input{accent-color:var(--primary);width:14px;height:14px}
+
+/* UPLOAD */
+.uz{border:2px dashed var(--border);border-radius:10px;padding:36px;text-align:center;cursor:pointer;transition:.15s;background:var(--border2)}
+.uz:hover,.uz.over{border-color:var(--primary);background:var(--primary-l)}
+.uf{display:flex;align-items:center;gap:9px;padding:8px 12px;background:var(--border2);border-radius:6px;margin-top:6px;font-size:.82em}
+.uf .n{flex:1;font-weight:500}
+.ebox{background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:12px;font-size:.78em;color:var(--text3);max-height:160px;overflow-y:auto;white-space:pre-wrap;font-family:'SF Mono',Monaco,Consolas,monospace;line-height:1.5}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.stat .sl{font-size:.7em;color:var(--text4);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.stat .sv{font-size:1.8em;font-weight:800;margin-top:2px}
+
+/* CLAIM LIST */
+.cl-row{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border2);cursor:pointer;transition:.08s;gap:14px}
+.cl-row:last-child{border-bottom:none}
+.cl-row:hover{background:rgba(99,102,241,.02)}
+.cl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cl-dot.ok{background:var(--green)}.cl-dot.no{background:var(--red)}.cl-dot.wait{background:var(--amber)}
+.cl-id{font-weight:700;width:55px;font-size:.88em}
+.cl-desc{flex:1;color:var(--text3);font-size:.82em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cl-amt{font-weight:600;width:80px;text-align:right;font-size:.88em}
+.pill{padding:2px 10px;border-radius:4px;font-size:.72em;font-weight:700}
+.pill.ok{background:var(--green-l);color:#065f46}
+.pill.no{background:var(--red-l);color:#991b1b}
+.pill.wait{background:var(--amber-l);color:#854d0e}
+
+/* RESULT */
+.rb{padding:16px 20px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.rb.ok{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1px solid #a7f3d0}
+.rb.no{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fecaca}
+.rb.wait{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #fde68a}
+.sp{padding:5px 14px;border-radius:16px;font-weight:700;color:#fff;font-size:.88em}
+.sp.ok{background:var(--green)}.sp.no{background:var(--red)}.sp.wait{background:var(--amber)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{background:var(--border2);padding:9px 12px;text-align:left;font-size:.7em;text-transform:uppercase;letter-spacing:.5px;color:var(--text4);font-weight:600;border-bottom:2px solid var(--border)}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border2);font-size:.82em;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover{background:rgba(99,102,241,.015)}
+.cp{padding:1px 7px;border-radius:8px;font-size:.72em;color:#fff;font-weight:700}
+.cp.h{background:var(--green)}.cp.m{background:var(--amber)}.cp.l{background:var(--red)}
+.rl{list-style:none;padding:0}.rl li{padding:7px 11px;border-left:3px solid var(--primary);background:var(--border2);margin-bottom:4px;border-radius:0 5px 5px 0;font-size:.82em}
+
+/* ===== N8N PIPELINE ===== */
+.n8n-canvas{position:relative;background:#1a1a2e;border-radius:12px;padding:44px 34px;overflow:hidden;min-height:580px}
+.n8n-canvas svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.n8n-canvas svg path{fill:none;stroke:#334155;stroke-width:2;transition:stroke .3s}
+.n8n-canvas svg path.active{stroke:var(--primary-t);stroke-dasharray:8 4;animation:flowDash .6s linear infinite}
+.n8n-canvas svg path.done{stroke:var(--green);stroke-width:2.5}
+@keyframes flowDash{to{stroke-dashoffset:-12}}
+
+.n8n-node{position:absolute;width:180px;background:#1e293b;border:2px solid #334155;border-radius:12px;z-index:2;transition:.3s;cursor:default}
+.n8n-node .nn-head{padding:12px 14px;border-bottom:1px solid #334155;display:flex;align-items:center;gap:10px}
+.n8n-node .nn-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:800;color:#fff;flex-shrink:0}
+.n8n-node .nn-title{font-size:.85em;font-weight:600;color:#e2e8f0;line-height:1.3}
+.n8n-node .nn-body{padding:8px 14px;font-size:.75em;color:#64748b;min-height:28px}
+.n8n-node .nn-num{font-size:.68em;color:#475569;position:absolute;top:-9px;left:10px;background:#1a1a2e;padding:0 6px;font-weight:700}
+
+.n8n-node.waiting{opacity:.4}
+.n8n-node.active{border-color:var(--primary-t);box-shadow:0 0 20px rgba(99,102,241,.3);opacity:1}
+.n8n-node.done{border-color:var(--green);opacity:1}
+.n8n-node.done .nn-icon{background:var(--green) !important}
+.n8n-node.done-w{border-color:var(--amber);opacity:1}
+.n8n-node.done-f{border-color:var(--red);opacity:1}
+
+/* Pipeline terminal */
+.n8n-term{background:#0f172a;border-radius:0 0 10px 10px;padding:16px 20px;max-height:240px;overflow-y:auto;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.78em;line-height:1.9;color:#64748b;border-top:1px solid #1e293b}
+.n8n-term .t-ok{color:#34d399}.t-w{color:#fbbf24}.t-e{color:#f87171}.t-i{color:#818cf8}
+.n8n-term .t-line{padding:4px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.n8n-status{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#111827;border-radius:10px 10px 0 0;border:1px solid #1e293b;border-bottom:none}
+.n8n-status .ns-l{font-size:.82em;font-weight:600;color:#e2e8f0}
+.n8n-status .ns-r{font-size:.78em;color:#64748b}
+
+.empty{text-align:center;padding:50px 20px;color:var(--text4)}
+@media(max-width:900px){.feat-grid{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr 1fr}.fi.s3{grid-column:span 2}.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.feat-grid{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.fi.s2,.fi.s3{grid-column:span 1}.stats{grid-template-columns:1fr 1fr}.dg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="mark">A</span>Audit GenX</div>
+    <div class="nav-links">
+      <a class="on" onclick="go('home')">Home</a>
+      <a onclick="go('process')">Process Claim</a>
+      <a onclick="go('upload')">Upload</a>
+      <a onclick="go('pipeline')">Live Pipeline</a>
+      <a onclick="go('dashboard')">Dashboard</a>
+      <a onclick="go('result')" id="navRes" style="display:none">Result</a>
+      <a onclick="go('info')">How It Works</a>
+      <a onclick="go('config')">Rules</a>
+    </div>
+    <div class="nav-right">Team Frame Flux</div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <div class="section on" id="s-home">
+    <div class="hero">
+      <h1>Insurance Claim Intelligence<br>Powered by <span>14-Stage AI</span></h1>
+      <p>Process claims through a transparent, auditable pipeline. Every decision is explainable, traceable, and verifiable. Built for compliance teams and claims officers.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card" onclick="go('process')">
+        <div class="fc-icon" style="background:var(--primary)">PC</div>
+        <h3>Process Claim</h3>
+        <p>Submit a new insurance claim and run it through all 14 verification stages with real-time feedback.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+      <div class="feat-card" onclick="go('upload')">
+        <div class="fc-icon" style="background:#0891b2">UP</div>
+        <h3>Upload Document</h3>
+        <p>Upload PDF, DOCX, or image files. Auto-extract text and detect claim fields from documents.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+      <div class="feat-card" onclick="go('pipeline')">
+        <div class="fc-icon" style="background:#7c3aed">LP</div>
+        <h3>Live Pipeline</h3>
+        <p>Watch the 14-stage automation execute in real time with n8n-style node visualization.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+      <div class="feat-card" onclick="go('dashboard')">
+        <div class="fc-icon" style="background:var(--green)">DB</div>
+        <h3>Dashboard</h3>
+        <p>View all processed claims, approval rates, risk scores, and audit consistency status.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+      <div class="feat-card" onclick="go('info')">
+        <div class="fc-icon" style="background:var(--amber)">14</div>
+        <h3>14-Stage Pipeline</h3>
+        <p>Understand each verification stage — from input validation to final audit verification.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+      <div class="feat-card" onclick="go('config')">
+        <div class="fc-icon" style="background:#64748b">CR</div>
+        <h3>Policy Rules</h3>
+        <p>View coverage rules, fraud indicators, damage classification, and risk scoring weights.</p>
+        <span class="fc-arrow">&rarr;</span>
+      </div>
+    </div>
+
+    <!-- SCROLLABLE CONTENT SECTIONS -->
+
+    <!-- PROBLEM -->
+    <div style="margin-top:64px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center">
+      <div style="font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--primary);margin-bottom:8px">The Problem</div>
+      <h2 style="font-size:1.6em;font-weight:800;letter-spacing:-.3px;line-height:1.3">Insurance fraud costs the industry over 80,000 crore annually</h2>
+      <p style="color:var(--text3);margin-top:12px;line-height:1.7;font-size:.95em">Manual claim processing is slow, inconsistent, and impossible to audit at scale. Claims officers make decisions without structured reasoning, leaving companies exposed to regulatory risk and fraudulent payouts.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:36px">
+      <div style="background:var(--red-l);border-radius:10px;padding:24px">
+        <div style="font-size:1.6em;font-weight:800;color:var(--red)">72%</div>
+        <div style="font-size:.85em;color:var(--text2);margin-top:4px">of insurance fraud goes undetected due to manual review limitations</div>
+      </div>
+      <div style="background:var(--amber-l);border-radius:10px;padding:24px">
+        <div style="font-size:1.6em;font-weight:800;color:var(--amber)">45 min</div>
+        <div style="font-size:.85em;color:var(--text2);margin-top:4px">average time to manually process a single claim with proper documentation checks</div>
+      </div>
+      <div style="background:var(--primary-l);border-radius:10px;padding:24px">
+        <div style="font-size:1.6em;font-weight:800;color:var(--primary)">0%</div>
+        <div style="font-size:.85em;color:var(--text2);margin-top:4px">of manual decisions come with a structured, auditable reasoning trail</div>
+      </div>
+    </div>
+
+    <!-- SOLUTION -->
+    <div style="margin-top:64px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center">
+      <div style="font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:8px">Our Solution</div>
+      <h2 style="font-size:1.6em;font-weight:800;letter-spacing:-.3px;line-height:1.3">A 14-stage AI pipeline that makes every decision explainable, traceable, and audit-ready</h2>
+      <p style="color:var(--text3);margin-top:12px;line-height:1.7;font-size:.95em">Audit GenX processes insurance claims through 14 automated verification stages in under a second. Every stage produces reasoning, a confidence score, and the data source — creating a complete audit trail that satisfies regulators like IRDAI.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px">
+        <div style="font-weight:700;font-size:.95em;margin-bottom:8px">For Insurance Companies</div>
+        <ul style="color:var(--text3);font-size:.88em;line-height:2;padding-left:18px">
+          <li>Process claims in under 1 second instead of 45 minutes</li>
+          <li>Detect fraud with 8 weighted indicators and risk scoring</li>
+          <li>Generate audit-ready documentation for every decision</li>
+          <li>Reduce fraudulent payouts with automated consistency checks</li>
+          <li>Stay compliant with IRDAI audit requirements</li>
+        </ul>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px">
+        <div style="font-weight:700;font-size:.95em;margin-bottom:8px">For Claims Officers</div>
+        <ul style="color:var(--text3);font-size:.88em;line-height:2;padding-left:18px">
+          <li>Get clear Approve / Reject / Pending decisions with reasoning</li>
+          <li>See exactly what was checked and why at every stage</li>
+          <li>Receive recommended next actions for each claim</li>
+          <li>Upload documents and auto-extract claim details</li>
+          <li>Watch the pipeline execute in real time</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div style="margin-top:64px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center">
+      <div style="font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--primary);margin-bottom:8px">How It Works</div>
+      <h2 style="font-size:1.6em;font-weight:800;letter-spacing:-.3px;line-height:1.3">Claim in, decision out — with a full audit trail</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-top:32px">
+      <div style="text-align:center;padding:20px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-l);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:800;margin:0 auto 12px">1</div>
+        <div style="font-weight:700;font-size:.9em">Submit Claim</div>
+        <div style="font-size:.8em;color:var(--text3);margin-top:4px;line-height:1.5">Fill in the claim form or upload a document. The system accepts PDF, DOCX, images, and text files.</div>
+      </div>
+      <div style="text-align:center;padding:20px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-l);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:800;margin:0 auto 12px">2</div>
+        <div style="font-weight:700;font-size:.9em">14-Stage Analysis</div>
+        <div style="font-size:.8em;color:var(--text3);margin-top:4px;line-height:1.5">The claim runs through validation, coverage check, fraud detection, risk scoring, and 10 more stages.</div>
+      </div>
+      <div style="text-align:center;padding:20px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-l);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:800;margin:0 auto 12px">3</div>
+        <div style="font-weight:700;font-size:.9em">Decision + Audit Trail</div>
+        <div style="font-size:.8em;color:var(--text3);margin-top:4px;line-height:1.5">Get Approved, Rejected, or Pending — with reasoning, confidence, and source at every step.</div>
+      </div>
+      <div style="text-align:center;padding:20px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-l);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:800;margin:0 auto 12px">4</div>
+        <div style="font-weight:700;font-size:.9em">Act on Recommendations</div>
+        <div style="font-size:.8em;color:var(--text3);margin-top:4px;line-height:1.5">Follow the system's recommended actions — request documents, escalate to SIU, or process payout.</div>
+      </div>
+    </div>
+
+    <!-- KEY NUMBERS -->
+    <div style="margin-top:64px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:40px;text-align:center">
+      <div style="font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text4);margin-bottom:20px">Platform Capabilities</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+        <div><div style="font-size:2em;font-weight:800;color:var(--primary)">14</div><div style="font-size:.82em;color:var(--text3);margin-top:2px">Verification Stages</div></div>
+        <div><div style="font-size:2em;font-weight:800;color:var(--primary)">8</div><div style="font-size:.82em;color:var(--text3);margin-top:2px">Fraud Indicators</div></div>
+        <div><div style="font-size:2em;font-weight:800;color:var(--primary)">&lt;1s</div><div style="font-size:.82em;color:var(--text3);margin-top:2px">Processing Time</div></div>
+        <div><div style="font-size:2em;font-weight:800;color:var(--primary)">100%</div><div style="font-size:.82em;color:var(--text3);margin-top:2px">Audit Traceability</div></div>
+      </div>
+    </div>
+
+    <!-- CONFIG DRIVEN -->
+    <div style="margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
+      <div>
+        <div style="font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--primary);margin-bottom:8px">Config-Driven</div>
+        <h2 style="font-size:1.4em;font-weight:800;letter-spacing:-.3px;line-height:1.3">Change the rules without changing the code</h2>
+        <p style="color:var(--text3);margin-top:12px;line-height:1.7;font-size:.9em">All business logic — coverage rules, fraud thresholds, damage keywords, payout percentages, risk weights — lives in a single JSON configuration file. Different insurance companies can have completely different rules without any code changes.</p>
+        <button class="btn btn-g" style="margin-top:16px" onclick="go('config')">View Policy Rules</button>
+      </div>
+      <div style="background:#0f172a;border-radius:10px;padding:20px;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.75em;color:#94a3b8;line-height:1.8;overflow:hidden">
+        <div style="color:#64748b">// policy_rules.json</div>
+        <div>{</div>
+        <div>&nbsp;&nbsp;<span style="color:#818cf8">"coverage_rules"</span>: { ... },</div>
+        <div>&nbsp;&nbsp;<span style="color:#818cf8">"exclusions"</span>: { ... },</div>
+        <div>&nbsp;&nbsp;<span style="color:#818cf8">"fraud_indicators"</span>: {</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#34d399">"past_claims_threshold"</span>: <span style="color:#fbbf24">3</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#34d399">"high_claim_minor_damage"</span>: <span style="color:#fbbf24">25000</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#34d399">"fraud_weight_config"</span>: { ... }</div>
+        <div>&nbsp;&nbsp;},</div>
+        <div>&nbsp;&nbsp;<span style="color:#818cf8">"damage_classification"</span>: { ... },</div>
+        <div>&nbsp;&nbsp;<span style="color:#818cf8">"risk_score_weights"</span>: { ... }</div>
+        <div>}</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="margin-top:64px;text-align:center;padding:48px 0 24px">
+      <h2 style="font-size:1.5em;font-weight:800;letter-spacing:-.3px">Ready to process your first claim?</h2>
+      <p style="color:var(--text3);margin-top:8px;font-size:.95em">Submit a claim and watch the 14-stage pipeline execute in real time.</p>
+      <div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
+        <button class="btn btn-p" onclick="go('process')">Process a Claim</button>
+        <button class="btn btn-g" onclick="go('pipeline')">View Live Pipeline</button>
+      </div>
+      <div style="margin-top:32px;font-size:.78em;color:var(--text4)">Built by Team Frame Flux | AI Build Sprint — Problem Statement 5</div>
+    </div>
+
+  </div>
+
+  <!-- PROCESS CLAIM -->
+  <div class="section" id="s-process">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div class="card">
+      <div class="card-h"><h2>Submit Insurance Claim</h2><div><button class="btn btn-g btn-sm" onclick="loadSample()">Load Sample</button> <button class="btn btn-g btn-sm" onclick="runAll()">Run 7 Test Claims</button></div></div>
+      <div class="card-b">
+        <form id="cForm" onsubmit="return submitClaim(event)">
+          <div class="fg">
+            <div class="fi"><label class="fl">Claim ID</label><input class="fx" id="f_cid" required placeholder="C8"></div>
+            <div class="fi"><label class="fl">Policy Type</label><select class="fx" id="f_pt"><option value="Comprehensive">Comprehensive</option><option value="Third-Party">Third-Party</option></select></div>
+            <div class="fi"><label class="fl">Claim Amount</label><input class="fx" id="f_ca" type="number" min="1" required placeholder="35000"></div>
+            <div class="fi s3"><label class="fl">Incident Description</label><textarea class="fx" id="f_desc" rows="2" required placeholder="Describe what happened to the vehicle..."></textarea></div>
+            <div class="fi"><label class="fl">Vehicle Value</label><input class="fx" id="f_vv" type="number" min="1" required placeholder="800000"></div>
+            <div class="fi"><label class="fl">Past Claims</label><input class="fx" id="f_pc" type="number" min="0" value="0"></div>
+            <div class="fi"><label class="fl">Claims This Year</label><input class="fx" id="f_cy" type="number" min="0" value="0"></div>
+            <div class="fi"><label class="fl">Policy Start</label><input class="fx" id="f_ps" type="date" required></div>
+            <div class="fi"><label class="fl">Incident Date</label><input class="fx" id="f_id" type="date" required></div>
+            <div class="fi"><label class="fl">Reporting Date</label><input class="fx" id="f_rd" type="date" required></div>
+            <div class="fi s3"><label class="fl">Documents Submitted</label><div class="dg" id="dChk"></div></div>
+          </div>
+          <div style="margin-top:18px;display:flex;gap:8px">
+            <button type="submit" class="btn btn-p" id="subBtn">Process Through 14 Stages</button>
+            <button type="button" class="btn btn-g" onclick="resetForm()">Clear</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="section" id="s-upload">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div class="card">
+      <div class="card-h"><h2>Upload Claim Document</h2></div>
+      <div class="card-b">
+        <p style="color:var(--text3);margin-bottom:14px;font-size:.88em">Upload a document to extract text and auto-detect claim fields. Supported: PDF, DOCX, JPG, PNG, TXT, CSV.</p>
+        <div class="uz" id="upZone" onclick="document.getElementById('fIn').click()">
+          <div style="font-size:1.4em;color:var(--text4);margin-bottom:6px">+</div>
+          <div style="font-size:.88em;color:var(--text3)">Click to upload or drag and drop</div>
+          <div style="font-size:.72em;color:var(--text4);margin-top:4px">Max 10MB</div>
+        </div>
+        <input type="file" id="fIn" accept=".pdf,.docx,.doc,.png,.jpg,.jpeg,.txt,.csv" style="display:none" onchange="doUpload(this)">
+        <div id="upFiles"></div>
+        <div id="exArea" style="display:none;margin-top:16px">
+          <h3 style="font-size:.88em;margin-bottom:8px">Extracted Content</h3>
+          <div class="ebox" id="exText"></div>
+          <div id="exFields" style="margin-top:10px"></div>
+          <button class="btn btn-p" style="margin-top:12px" onclick="useFields()">Use Extracted Fields</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE PIPELINE (n8n style) -->
+  <div class="section" id="s-pipeline">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div style="text-align:center;margin-bottom:24px">
+      <p style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:8px">Live Automation</p>
+      <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:#1a1a1a;letter-spacing:-0.02em;margin:0" id="lpTitle">14-Stage Pipeline</h1>
+      <p style="font-size:14px;color:#888;margin-top:6px" id="lpStat">Submit a claim to watch the pipeline execute in real time</p>
+    </div>
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="n8n-canvas" id="n8nCanvas">
+        <svg id="n8nSvg"></svg>
+      </div>
+      <div class="n8n-term" id="lpLog"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="section" id="s-dashboard">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div class="stats">
+      <div class="stat"><div class="sl">Total</div><div class="sv" id="sT" style="color:var(--primary)">0</div></div>
+      <div class="stat"><div class="sl">Approved</div><div class="sv" id="sA" style="color:var(--green)">0</div></div>
+      <div class="stat"><div class="sl">Rejected</div><div class="sv" id="sR" style="color:var(--red)">0</div></div>
+      <div class="stat"><div class="sl">Pending</div><div class="sv" id="sP" style="color:var(--amber)">0</div></div>
+      <div class="stat"><div class="sl">Audit</div><div class="sv" id="sC" style="color:var(--green)">--</div></div>
+    </div>
+    <div class="card"><div class="card-h"><h2>Processed Claims</h2><button class="btn btn-d btn-sm" onclick="clearAll()">Clear All</button></div><div id="cList"><div class="empty"><p>No claims processed yet.</p></div></div></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="section" id="s-result">
+    <span class="back-link" onclick="go('dashboard')">&larr; Back to Dashboard</span>
+    <div id="resC"><div class="empty"><p>No result to display.</p></div></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="section" id="s-info">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div class="card"><div class="card-h"><h2>14-Stage Processing Pipeline</h2></div><div class="card-b">
+      <p style="color:var(--text3);margin-bottom:16px;font-size:.88em">Every claim passes through 14 automated stages. Each produces reasoning, confidence score, and data source.</p>
+      <table class="tbl"><thead><tr><th>#</th><th>Stage</th><th>What It Checks</th><th>Output</th></tr></thead><tbody>
+        <tr><td>1</td><td>Input Validation</td><td>All 12 fields — types, ranges, required</td><td>Valid / errors</td></tr>
+        <tr><td>2</td><td>Document Verification</td><td>Each of 6 required documents</td><td>Completeness %</td></tr>
+        <tr><td>3</td><td>Claim Analysis</td><td>Incident type from description</td><td>collision / fire / flood / theft</td></tr>
+        <tr><td>4</td><td>Damage Assessment</td><td>Severity + repair range check</td><td>minor / moderate / major</td></tr>
+        <tr><td>5</td><td>Coverage Validation</td><td>Policy type + exclusions</td><td>Covered / Not covered</td></tr>
+        <tr><td>6</td><td>Policy Limit</td><td>Claim vs policy maximum</td><td>Within / Exceeds</td></tr>
+        <tr><td>7</td><td>History Check</td><td>Past claims, recent policy</td><td>Risk flags</td></tr>
+        <tr><td>8</td><td>Fraud Detection</td><td>8 weighted indicators</td><td>Score 0-100</td></tr>
+        <tr><td>9</td><td>Consistency Check</td><td>Amount vs damage vs policy</td><td>Consistent / issues</td></tr>
+        <tr><td>10</td><td>Risk Scoring</td><td>6-factor weighted composite</td><td>Score 0-100</td></tr>
+        <tr><td>11</td><td>Decision</td><td>All prior stages</td><td>Approved / Rejected / Pending</td></tr>
+        <tr><td>12</td><td>Payout Estimation</td><td>Damage + deductible</td><td>Net payout</td></tr>
+        <tr><td>13</td><td>Recommendations</td><td>Decision + risk context</td><td>Actions for officer</td></tr>
+        <tr><td>14</td><td>Audit Verification</td><td>All 13 stages for contradictions</td><td>Consistent / contradictions</td></tr>
+      </tbody></table>
+    </div></div>
+    <div class="card"><div class="card-h"><h2>Required Documents</h2></div><div class="card-b"><table class="tbl"><thead><tr><th>#</th><th>Document</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td>1</td><td>FIR / Police Report</td><td>Proves incident reported</td></tr><tr><td>2</td><td>Driving License</td><td>Driver authorization</td></tr><tr><td>3</td><td>Vehicle Registration (RC)</td><td>Vehicle ownership</td></tr><tr><td>4</td><td>Insurance Policy Copy</td><td>Active coverage</td></tr><tr><td>5</td><td>Claim Form (signed)</td><td>Formal request</td></tr><tr><td>6</td><td>Repair Estimate / Bill</td><td>Repair cost proof</td></tr>
+    </tbody></table></div></div>
+    <div class="card"><div class="card-h"><h2>Policy Types</h2></div><div class="card-b"><table class="tbl"><thead><tr><th>Policy</th><th>Own Damage</th><th>Third-Party</th><th>Theft / Fire / Flood</th><th>Limit</th></tr></thead><tbody>
+      <tr><td>Comprehensive</td><td style="color:var(--green)">Covered</td><td style="color:var(--green)">Covered</td><td style="color:var(--green)">Covered</td><td>10,00,000</td></tr>
+      <tr><td>Third-Party</td><td style="color:var(--red)">Not Covered</td><td style="color:var(--green)">Covered</td><td style="color:var(--red)">Not Covered</td><td>5,00,000</td></tr>
+    </tbody></table></div></div>
+  </div>
+
+  <!-- CONFIG -->
+  <div class="section" id="s-config">
+    <span class="back-link" onclick="go('home')">&larr; Back to Home</span>
+    <div class="card"><div class="card-h"><h2>Coverage Rules</h2></div><div class="card-b" id="cfC"></div></div>
+    <div class="card"><div class="card-h"><h2>Policy Exclusions</h2></div><div class="card-b" id="cfE"></div></div>
+    <div class="card"><div class="card-h"><h2>Fraud Detection Indicators</h2></div><div class="card-b" id="cfF"></div></div>
+    <div class="card"><div class="card-h"><h2>Damage Classification</h2></div><div class="card-b" id="cfDm"></div></div>
+    <div class="card"><div class="card-h"><h2>Risk Score Weights</h2></div><div class="card-b" id="cfR"></div></div>
+  </div>
+
+</div>
+
+<script>
+const DOCS=["FIR / Police Report","Driving License","Vehicle Registration (RC)","Insurance Policy Copy","Claim Form (signed)","Repair Estimate / Bill"];
+const STG=[
+  {n:"Input Validation",s:"IV",c:"#4338ca"},
+  {n:"Doc Verification",s:"DV",c:"#0891b2"},
+  {n:"Claim Analysis",s:"CA",c:"#7c3aed"},
+  {n:"Damage Assessment",s:"DA",c:"#c026d3"},
+  {n:"Coverage Check",s:"CC",c:"#2563eb"},
+  {n:"Policy Limit",s:"PL",c:"#0d9488"},
+  {n:"History Check",s:"HC",c:"#9333ea"},
+  {n:"Fraud Detection",s:"FD",c:"#dc2626"},
+  {n:"Consistency",s:"CX",c:"#ea580c"},
+  {n:"Risk Scoring",s:"RS",c:"#d97706"},
+  {n:"Decision",s:"DE",c:"#4338ca"},
+  {n:"Payout Est.",s:"PE",c:"#059669"},
+  {n:"Recommendations",s:"RC",c:"#0891b2"},
+  {n:"Audit Verify",s:"AV",c:"#16a34a"}
+];
+let sIdx=0,lastRes=null,upDocs=[],lastParsed={},nodePositions=[];
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded",()=>{
+  const dc=document.getElementById("dChk");
+  DOCS.forEach((d,i)=>{dc.innerHTML+=`<label class="dc"><input type="checkbox" id="doc_${i}" value="${d}" checked>${d}</label>`});
+  const today=new Date().toISOString().split("T")[0];
+  document.getElementById("f_ps").value="2025-06-01";
+  document.getElementById("f_id").value=today;
+  document.getElementById("f_rd").value=today;
+  buildN8nPipeline();
+  loadDash();
+  loadCfg();
+  const uz=document.getElementById("upZone");
+  uz.addEventListener("dragover",e=>{e.preventDefault();uz.classList.add("over")});
+  uz.addEventListener("dragleave",()=>uz.classList.remove("over"));
+  uz.addEventListener("drop",e=>{e.preventDefault();uz.classList.remove("over");if(e.dataTransfer.files.length)uploadFile(e.dataTransfer.files[0])});
+});
+
+// ===== NAVIGATION =====
+function go(p){
+  document.querySelectorAll(".section").forEach(x=>x.classList.remove("on"));
+  document.getElementById("s-"+p).classList.add("on");
+  document.querySelectorAll(".nav-links a").forEach(a=>{a.classList.toggle("on",a.textContent.toLowerCase().replace(/\s/g,'')==={home:'home',process:'processclaim',upload:'upload',pipeline:'livepipeline',dashboard:'dashboard',result:'result',info:'howitworks',config:'rules'}[p])});
+  if(p==="dashboard")loadDash();
+  window.scrollTo(0,0);
+}
+
+// ===== N8N PIPELINE =====
+function buildN8nPipeline(){
+  const canvas=document.getElementById("n8nCanvas");
+  const svg=document.getElementById("n8nSvg");
+  // Layout: 5 cols, 3 rows — snake pattern
+  // Row 0: 0,1,2,3,4 (L->R)
+  // Row 1: 9,8,7,6,5 (R->L)
+  // Row 2: 10,11,12,13 (L->R)
+  const cols=5, nw=180, nh=90, gx=24, gy=48;
+  const ox=20, oy=20;
+  const order=[0,1,2,3,4, 9,8,7,6,5, 10,11,12,13];
+  const positions=[];
+  order.forEach((si,idx)=>{
+    const row=Math.floor(idx/cols);
+    const col=idx%cols;
+    const x=ox+col*(nw+gx);
+    const y=oy+row*(nh+gy);
+    positions[si]={x,y};
+  });
+  nodePositions=positions;
+
+  // Set canvas height
+  const maxY=Math.max(...positions.map(p=>p.y))+nh+40;
+  canvas.style.minHeight=maxY+"px";
+
+  // Create nodes
+  let nodesHtml="";
+  STG.forEach((s,i)=>{
+    const p=positions[i];
+    nodesHtml+=`<div class="n8n-node waiting" id="nn${i}" style="left:${p.x}px;top:${p.y}px">
+      <div class="nn-num">Stage ${i+1}</div>
+      <div class="nn-head"><div class="nn-icon" style="background:${s.c}">${s.s}</div><div class="nn-title">${s.n}</div></div>
+      <div class="nn-body" id="nnb${i}">Waiting</div>
+    </div>`;
+  });
+  canvas.insertAdjacentHTML("beforeend",nodesHtml);
+
+  // Draw SVG connections
+  // Connection order: 0->1->2->3->4->5->6->7->8->9->10->11->12->13
+  let paths="";
+  for(let i=0;i<13;i++){
+    const from=positions[i], to=positions[i+1];
+    const fx=from.x+nw, fy=from.y+nh/2;
+    const tx=to.x, ty=to.y+nh/2;
+    // Determine if same row or different row
+    const sameRow=Math.abs(fy-ty)<20;
+    let d;
+    if(sameRow){
+      // Horizontal bezier
+      const mx=(fx+tx)/2;
+      d=`M${fx},${fy} C${mx},${fy} ${mx},${ty} ${tx},${ty}`;
+    }else{
+      // Vertical transition (between rows)
+      const midY=(fy+ty)/2;
+      if(i===4){
+        // Row 0->1: from right end down to right end
+        const sx=from.x+nw, sy=from.y+nh/2;
+        const ex=to.x+nw, ey=to.y+nh/2;
+        d=`M${sx},${sy} C${sx+40},${sy} ${ex+40},${ey} ${ex},${ey}`;
+      }else if(i===9){
+        // Row 1->2: from left end down to left end
+        const sx=from.x, sy=from.y+nh/2;
+        const ex=to.x, ey=to.y+nh/2;
+        d=`M${sx},${sy} C${sx-40},${sy} ${ex-40},${ey} ${ex},${ey}`;
+      }else{
+        d=`M${fx},${fy} C${fx+30},${fy} ${tx-30},${ty} ${tx},${ty}`;
+      }
+    }
+    paths+=`<path id="conn${i}" d="${d}"/>`;
+  }
+  svg.innerHTML=paths;
+}
+
+function resetN8n(){
+  STG.forEach((_,i)=>{
+    document.getElementById("nn"+i).className="n8n-node waiting";
+    document.getElementById("nnb"+i).textContent="Waiting";
+  });
+  for(let i=0;i<13;i++){
+    const p=document.getElementById("conn"+i);
+    if(p)p.className.baseVal="";
+  }
+  document.getElementById("lpLog").innerHTML='';
+  document.getElementById("lpStat").textContent="Executing pipeline...";
+  document.getElementById("lpStat").style.color="#6366f1";
+}
+
+function activateN8n(i){
+  document.getElementById("nn"+i).className="n8n-node active";
+  document.getElementById("nnb"+i).textContent="Processing...";
+  if(i>0){const c=document.getElementById("conn"+(i-1));if(c)c.className.baseVal="active";}
+}
+
+function completeN8n(i,conf,reason){
+  const cls=conf>=0.8?"done":conf>=0.6?"done-w":"done-f";
+  document.getElementById("nn"+i).className="n8n-node "+cls;
+  const lbl=conf>=0.8?"OK":conf>=0.6?"MED":"LOW";
+  document.getElementById("nnb"+i).textContent=conf+" "+lbl;
+  if(i>0){const c=document.getElementById("conn"+(i-1));if(c)c.className.baseVal="done";}
+}
+
+function termLog(html){
+  const log=document.getElementById("lpLog");
+  log.innerHTML+="\n"+html;
+  log.scrollTop=log.scrollHeight;
+}
+
+// ===== FORM =====
+function resetForm(){
+  document.getElementById("cForm").reset();
+  document.querySelectorAll("#dChk input").forEach(c=>c.checked=true);
+  const today=new Date().toISOString().split("T")[0];
+  document.getElementById("f_ps").value="2025-06-01";
+  document.getElementById("f_id").value=today;
+  document.getElementById("f_rd").value=today;
+}
+
+async function loadSample(){
+  const r=await(await fetch("/api/sample-claims")).json();
+  const c=r[sIdx%r.length];sIdx++;
+  document.getElementById("f_cid").value=c.claim_id;
+  document.getElementById("f_desc").value=c.description;
+  document.getElementById("f_pt").value=c.policy_type;
+  document.getElementById("f_ca").value=c.claim_amount;
+  document.getElementById("f_vv").value=c.vehicle_value;
+  document.getElementById("f_pc").value=c.past_claims;
+  document.getElementById("f_cy").value=c.claims_this_year;
+  document.getElementById("f_ps").value=c.policy_start_date;
+  document.getElementById("f_id").value=c.incident_date;
+  document.getElementById("f_rd").value=c.reporting_date;
+  document.querySelectorAll("#dChk input").forEach(cb=>{cb.checked=(c.documents_submitted||[]).includes(cb.value)});
+}
+
+function getFormData(){
+  const docs=[];document.querySelectorAll("#dChk input:checked").forEach(c=>docs.push(c.value));
+  return {
+    claim_id:document.getElementById("f_cid").value,
+    description:document.getElementById("f_desc").value,
+    policy_type:document.getElementById("f_pt").value,
+    claim_amount:parseFloat(document.getElementById("f_ca").value),
+    vehicle_value:parseFloat(document.getElementById("f_vv").value),
+    past_claims:parseInt(document.getElementById("f_pc").value),
+    claims_this_year:parseInt(document.getElementById("f_cy").value),
+    policy_start_date:document.getElementById("f_ps").value,
+    incident_date:document.getElementById("f_id").value,
+    reporting_date:document.getElementById("f_rd").value,
+    documents_submitted:docs,
+    uploaded_files:upDocs.map(d=>({name:d.original_name,url:d.download_url}))
+  };
+}
+
+// ===== SUBMIT WITH SSE =====
+async function submitClaim(e){
+  e.preventDefault();
+  const btn=document.getElementById("subBtn");
+  btn.disabled=true;btn.textContent="Processing...";
+  const data=getFormData();
+  go("pipeline");
+  resetN8n();
+  document.getElementById("lpTitle").textContent="Processing: "+data.claim_id;
+  try{
+    const res=await fetch("/api/process-stream",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    const reader=res.body.getReader();
+    const decoder=new TextDecoder();
+    let buffer="";
+    while(true){
+      const{done,value}=await reader.read();
+      if(done)break;
+      buffer+=decoder.decode(value,{stream:true});
+      const lines=buffer.split("\n");
+      buffer=lines.pop();
+      for(const line of lines){
+        if(!line.startsWith("data: "))continue;
+        const d=JSON.parse(line.slice(6));
+        if(d.stage==="done"){
+          lastRes=d.result;
+          document.getElementById("lpStat").textContent="Complete — "+d.result.Status+" | Confidence: "+d.result["Confidence Score"];
+          document.getElementById("lpStat").style.color=d.result.Status==="Approved"?"var(--green)":d.result.Status==="Rejected"?"var(--red)":"var(--amber)";
+          termLog(`<div class="t-line" style="border-top:1px solid rgba(255,255,255,.08);margin-top:4px;padding-top:8px"><span class="t-ok">Pipeline complete — ${d.result.Status} | Confidence: ${d.result["Confidence Score"]} | Payout: ${d.result["Estimated Payout"]}</span></div>`);
+          document.getElementById("navRes").style.display="";
+          showResult(d.result);
+        }else{
+          const i=d.stage-1;
+          activateNode(i);
+          await new Promise(r=>setTimeout(r,60));
+          completeN8n(i,d.data.confidence,d.data.reason);
+          const ccls=d.data.confidence>=0.8?"t-ok":d.data.confidence>=0.6?"t-w":"t-e";
+          termLog(`<div class="t-line"><span class="${ccls}">[${d.stage}/14] ${d.name}</span> <span style="color:#475569">— ${d.data.reason.substring(0,120)}</span></div>`);
+          if(d.stage<14)activateN8n(d.stage);
+        }
+      }
+    }
+  }catch(err){termLog(`<span class="t-e">Error: ${err.message}</span>`)}
+  btn.disabled=false;btn.textContent="Process Through 14 Stages";
+}
+
+function activateNode(i){activateN8n(i)}
+
+// ===== RESULT =====
+function showResult(r){
+  const s=r.Status.toLowerCase();const sc=s==="approved"?"ok":s==="rejected"?"no":"wait";
+  let rows="";
+  (r["Audit Log"]||[]).forEach((st,i)=>{
+    const c=st.confidence;const cc=c>=0.8?"h":c>=0.6?"m":"l";const cl=c>=0.8?"HIGH":c>=0.6?"MED":"LOW";
+    const nm=st.step.replace(/_/g," ").replace(/\b\w/g,x=>x.toUpperCase());
+    rows+=`<tr><td style="color:var(--text4);font-weight:700">${i+1}</td><td style="font-weight:600;white-space:nowrap">${nm}</td><td>${(st.reason||"").substring(0,160)}</td><td style="text-align:center"><span class="cp ${cc}">${c} ${cl}</span></td><td style="color:var(--text4);font-size:.78em">${(st.source||"").substring(0,70)}</td></tr>`;
+  });
+  let recs="";(r.Recommendations||[]).forEach(x=>{recs+=`<li>${x}</li>`});
+  let docs="";(r["Uploaded Documents"]||[]).forEach(d=>{docs+=`<a href="${d.url}" target="_blank" style="padding:3px 9px;background:var(--border2);border-radius:4px;font-size:.78em;color:var(--primary);text-decoration:none;margin-right:4px">${d.name}</a>`});
+  document.getElementById("resC").innerHTML=`
+    <div class="rb ${sc}">
+      <div><div style="font-size:1.05em;font-weight:700">Claim ${r["Claim ID"]}</div>
+        <div style="font-size:.82em;color:var(--text3);margin-top:3px">${r["Policy Type"]} | ${r["Claim Amount"]} | Damage: ${r["Damage Level"]} | Risk: ${r["Risk Score"]}/100 | Fraud: ${r["Fraud Risk"]}</div></div>
+      <div style="text-align:right"><span class="sp ${sc}">${r.Status}</span>
+        <div style="font-size:.78em;color:var(--text3);margin-top:4px">Confidence: ${r["Confidence Score"]} | Payout: ${r["Estimated Payout"]}</div></div>
+    </div>
+    <div class="card"><div class="card-b">
+      <div style="font-size:.9em;margin-bottom:14px"><strong>Decision:</strong> ${r.Reason}</div>
+      ${docs?`<div style="margin-bottom:14px"><strong style="font-size:.82em">Attached:</strong> ${docs}</div>`:""}
+      <div style="overflow-x:auto"><table class="tbl"><thead><tr><th style="width:28px">#</th><th style="width:13%">Stage</th><th style="width:40%">Reasoning</th><th style="width:10%">Conf.</th><th style="width:25%">Source</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${recs?`<div style="margin-top:16px"><strong style="font-size:.85em">Recommended Actions</strong><ul class="rl" style="margin-top:6px">${recs}</ul></div>`:""}
+    </div></div>`;
+  lastRes=r;
+}
+
+// ===== DASHBOARD =====
+async function loadDash(){
+  const data=await(await fetch("/api/dashboard")).json();
+  document.getElementById("sT").textContent=data.length;
+  document.getElementById("sA").textContent=data.filter(r=>r.Status==="Approved").length;
+  document.getElementById("sR").textContent=data.filter(r=>r.Status==="Rejected").length;
+  document.getElementById("sP").textContent=data.filter(r=>r.Status==="Pending").length;
+  if(data.length){
+    const ok=data.every(r=>{const av=(r["Audit Log"]||[]).find(s=>s.step==="audit_verification");return av&&av.result&&av.result.consistent});
+    document.getElementById("sC").textContent=ok?"Pass":"Fail";document.getElementById("sC").style.color=ok?"var(--green)":"var(--red)";
+  }else{document.getElementById("sC").textContent="--"}
+  const cl=document.getElementById("cList");
+  if(!data.length){cl.innerHTML='<div class="empty"><p>No claims processed yet.</p></div>';return}
+  let h="";
+  data.forEach(r=>{
+    const s=r.Status.toLowerCase();const sc=s==="approved"?"ok":s==="rejected"?"no":"wait";
+    h+=`<div class="cl-row" onclick='showResult(${JSON.stringify(r).replace(/'/g,"&#39;")});document.getElementById("navRes").style.display="";go("result")'>
+      <div class="cl-dot ${sc}"></div><div class="cl-id">${r["Claim ID"]}</div><div class="cl-desc">${r.Reason}</div><div class="cl-amt">${r["Claim Amount"]}</div><div class="pill ${sc}">${r.Status}</div></div>`;
+  });
+  cl.innerHTML=h;
+}
+
+async function runAll(){
+  const btn=event.target;btn.disabled=true;btn.textContent="Processing...";
+  await fetch("/api/clear",{method:"POST"});
+  const claims=await(await fetch("/api/sample-claims")).json();
+  for(const c of claims){
+    await fetch("/api/process",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...c,documents_submitted:c.documents_submitted||[]})});
+  }
+  btn.disabled=false;btn.textContent="Run 7 Test Claims";
+  go("dashboard");
+}
+
+async function clearAll(){if(!confirm("Clear all?"))return;await fetch("/api/clear",{method:"POST"});loadDash()}
+
+// ===== UPLOAD =====
+function doUpload(input){if(input.files.length)uploadFile(input.files[0])}
+async function uploadFile(file){
+  const uf=document.getElementById("upFiles");
+  const id="u"+Date.now();
+  uf.innerHTML+=`<div class="uf" id="${id}"><span>[ ]</span><span class="n">${file.name}</span><span style="font-size:.72em;color:var(--amber)">Extracting...</span></div>`;
+  const fd=new FormData();fd.append("file",file);
+  try{
+    const data=await(await fetch("/api/upload",{method:"POST",body:fd})).json();
+    if(data.error){document.getElementById(id).innerHTML=`<span class="n">${file.name}</span><span style="font-size:.72em;color:var(--red)">${data.error}</span>`;return}
+    document.getElementById(id).innerHTML=`<span class="n">${file.name}</span><a href="${data.download_url}" target="_blank" style="font-size:.78em;color:var(--primary)">View</a><span style="font-size:.72em;color:var(--green)">Extracted</span>`;
+    upDocs.push(data);lastParsed=data.parsed_fields||{};
+    document.getElementById("exArea").style.display="";
+    document.getElementById("exText").textContent=data.extracted_text||"(No text)";
+    let pf="";
+    if(Object.keys(lastParsed).length){
+      pf='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">';
+      for(const[k,v]of Object.entries(lastParsed)){pf+=`<span style="padding:3px 9px;background:var(--primary-l);border-radius:4px;font-size:.8em"><strong>${k.replace(/_/g," ")}:</strong> ${v}</span>`}
+      pf+="</div>";
+    }
+    document.getElementById("exFields").innerHTML=pf;
+  }catch(err){document.getElementById(id).innerHTML=`<span class="n">${file.name}</span><span style="font-size:.72em;color:var(--red)">Error</span>`}
+}
+
+function useFields(){
+  go("process");
+  if(lastParsed.claim_amount)document.getElementById("f_ca").value=lastParsed.claim_amount;
+  if(lastParsed.vehicle_value)document.getElementById("f_vv").value=lastParsed.vehicle_value;
+  if(lastParsed.policy_type)document.getElementById("f_pt").value=lastParsed.policy_type;
+  if(lastParsed.past_claims)document.getElementById("f_pc").value=lastParsed.past_claims;
+  if(lastParsed.claims_this_year)document.getElementById("f_cy").value=lastParsed.claims_this_year;
+  if(lastParsed.description)document.getElementById("f_desc").value=lastParsed.description;
+  if(lastParsed.claim_id)document.getElementById("f_cid").value=lastParsed.claim_id;
+  if(lastParsed.incident_date)document.getElementById("f_id").value=lastParsed.incident_date;
+  if(lastParsed.reporting_date)document.getElementById("f_rd").value=lastParsed.reporting_date;
+  if(lastParsed.policy_start_date)document.getElementById("f_ps").value=lastParsed.policy_start_date;
+}
+
+// ===== CONFIG =====
+async function loadCfg(){
+  const c=await(await fetch("/api/config")).json();
+  // Coverage
+  let h='<table class="tbl"><thead><tr><th>Policy</th><th>Own Damage</th><th>Third-Party</th><th>Theft</th><th>Fire</th><th>Natural Disaster</th><th>Limit</th><th>Deductible</th></tr></thead><tbody>';
+  for(const[n,r]of Object.entries(c.coverage_rules||{})){
+    const y=v=>v?'<span style="color:var(--green)">Yes</span>':'<span style="color:var(--red)">No</span>';
+    h+=`<tr><td><strong>${n}</strong></td><td>${y(r.covers_own_damage)}</td><td>${y(r.covers_third_party)}</td><td>${y(r.covers_theft)}</td><td>${y(r.covers_fire)}</td><td>${y(r.covers_natural_disaster)}</td><td>${(r.policy_limit_inr||0).toLocaleString('en-IN')}</td><td>${(r.deductible_inr||0).toLocaleString('en-IN')}</td></tr>`;
+  }
+  document.getElementById("cfC").innerHTML=h+'</tbody></table>';
+  // Exclusions
+  h='';for(const[n,items]of Object.entries(c.exclusions||{})){
+    h+=`<div style="margin-bottom:8px"><strong style="font-size:.88em">${n}:</strong> ${items.map(i=>`<span style="display:inline-block;padding:2px 8px;background:var(--red-l);color:#991b1b;border-radius:4px;font-size:.78em;margin:2px">${i}</span>`).join(' ')}</div>`;
+  }
+  document.getElementById("cfE").innerHTML=h;
+  // Fraud
+  const fi=c.fraud_indicators||{},fw=fi.fraud_weight_config||{};
+  h='<table class="tbl"><thead><tr><th>Indicator</th><th>Threshold</th><th>Weight</th></tr></thead><tbody>';
+  h+=`<tr><td>Past claims exceeded</td><td>More than ${fi.past_claims_threshold} claims</td><td>${fw.past_claims_exceeded||0}/100</td></tr>`;
+  h+=`<tr><td>High claim for minor damage</td><td>Claim above ${(fi.high_claim_minor_damage_threshold_inr||0).toLocaleString('en-IN')}</td><td>${fw.high_claim_minor_damage||0}/100</td></tr>`;
+  h+=`<tr><td>Claim vs vehicle value</td><td>Above ${(fi.claim_amount_vs_vehicle_value_ratio||0)*100}% of value</td><td>${fw.description_amount_mismatch||0}/100</td></tr>`;
+  h+=`<tr><td>Missing documents</td><td>Required docs missing</td><td>${fw.missing_documents||0}/100</td></tr>`;
+  h+=`<tr><td>Multiple claims per year</td><td>${fi.multiple_claims_same_year_threshold}+ this year</td><td>${fw.multiple_claims_same_year||0}/100</td></tr>`;
+  h+=`<tr><td>Late reporting</td><td>${fi.late_reporting_days}+ days late</td><td>${fw.late_reporting||0}/100</td></tr>`;
+  h+=`<tr><td>Exclusion keywords</td><td>Drunk driving, racing, etc.</td><td>${fw.exclusion_keywords_found||0}/100</td></tr>`;
+  h+=`<tr><td>Amount outside range</td><td>Doesn't match damage level</td><td>10/100</td></tr>`;
+  document.getElementById("cfF").innerHTML=h+'</tbody></table>';
+  // Damage
+  h='<table class="tbl"><thead><tr><th>Level</th><th>Keywords</th><th>Repair Range</th><th>Payout</th></tr></thead><tbody>';
+  for(const[lv,info]of Object.entries(c.damage_classification||{})){
+    const clr={minor:'var(--green)',moderate:'var(--amber)',major:'var(--red)'}[lv]||'';
+    h+=`<tr><td style="color:${clr};font-weight:700;text-transform:capitalize">${lv}</td><td style="font-size:.78em;color:var(--text3)">${(info.keywords||[]).join(', ')}</td><td>${(info.typical_repair_range||[0,0])[0].toLocaleString('en-IN')} – ${(info.typical_repair_range||[0,0])[1].toLocaleString('en-IN')}</td><td>${info.payout_percent_min}–${info.payout_percent_max}%</td></tr>`;
+  }
+  document.getElementById("cfDm").innerHTML=h+'</tbody></table>';
+  // Risk
+  const rw=c.risk_score_weights||{};
+  h='<table class="tbl"><thead><tr><th>Factor</th><th>Weight</th><th></th></tr></thead><tbody>';
+  for(const[k,v]of Object.entries(rw)){
+    const pct=Math.round(v*100);
+    h+=`<tr><td>${k.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</td><td>${pct}%</td><td><div style="background:var(--border2);border-radius:3px;height:14px;width:140px"><div style="background:var(--primary);height:100%;border-radius:3px;width:${pct*1.4}px"></div></div></td></tr>`;
+  }
+  document.getElementById("cfR").innerHTML=h+'</tbody></table>';
+}
+</script>
+</body></html>

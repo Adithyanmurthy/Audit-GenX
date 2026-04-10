@@ -1,0 +1,221 @@
+{
+  "coverage_rules": {
+    "Comprehensive": {
+      "covers_own_damage": true,
+      "covers_third_party": true,
+      "covers_theft": true,
+      "covers_fire": true,
+      "covers_natural_disaster": true,
+      "policy_limit_inr": 1000000,
+      "deductible_inr": 3000,
+      "description": "Covers own damage, third-party liability, theft, fire, and natural disasters"
+    },
+    "Third-Party": {
+      "covers_own_damage": false,
+      "covers_third_party": true,
+      "covers_theft": false,
+      "covers_fire": false,
+      "covers_natural_disaster": false,
+      "policy_limit_inr": 500000,
+      "deductible_inr": 0,
+      "description": "Covers only third-party liability; does NOT cover own vehicle damage"
+    }
+  },
+  "exclusions": {
+    "Comprehensive": [
+      "racing",
+      "drunk driving",
+      "commercial use without endorsement",
+      "war",
+      "nuclear"
+    ],
+    "Third-Party": [
+      "own damage",
+      "theft",
+      "fire",
+      "natural disaster",
+      "racing",
+      "drunk driving"
+    ]
+  },
+  "required_documents": [
+    "FIR / Police Report",
+    "Driving License",
+    "Vehicle Registration (RC)",
+    "Insurance Policy Copy",
+    "Claim Form (signed)",
+    "Repair Estimate / Bill"
+  ],
+  "fraud_indicators": {
+    "past_claims_threshold": 3,
+    "high_claim_minor_damage_threshold_inr": 25000,
+    "recent_policy_purchase_days": 30,
+    "claim_amount_vs_vehicle_value_ratio": 0.8,
+    "multiple_claims_same_year_threshold": 2,
+    "missing_documents_flag": true,
+    "inconsistency_flag": true,
+    "late_reporting_days": 30,
+    "minor_damage_keywords": [
+      "scratch",
+      "scuff",
+      "minor",
+      "small",
+      "light",
+      "superficial",
+      "cosmetic",
+      "paint chip"
+    ],
+    "fraud_weight_config": {
+      "past_claims_exceeded": 25,
+      "high_claim_minor_damage": 20,
+      "missing_documents": 15,
+      "description_amount_mismatch": 20,
+      "multiple_claims_same_year": 15,
+      "late_reporting": 10,
+      "exclusion_keywords_found": 15
+    }
+  },
+  "damage_classification": {
+    "minor": {
+      "keywords": [
+        "scratch",
+        "scuff",
+        "minor",
+        "small",
+        "light",
+        "superficial",
+        "cosmetic",
+        "paint chip"
+      ],
+      "payout_percent_min": 70,
+      "payout_percent_max": 90,
+      "typical_repair_range": [
+        2000,
+        15000
+      ],
+      "description": "Scratches, scuffs, paint chips"
+    },
+    "moderate": {
+      "keywords": [
+        "panel",
+        "broken light",
+        "headlight",
+        "taillight",
+        "fender",
+        "door",
+        "mirror",
+        "windshield",
+        "crack",
+        "bent",
+        "bumper",
+        "dent",
+        "replaced"
+      ],
+      "payout_percent_min": 50,
+      "payout_percent_max": 70,
+      "typical_repair_range": [
+        15000,
+        80000
+      ],
+      "description": "Panel damage, broken lights, fender bends, bumper damage"
+    },
+    "major": {
+      "keywords": [
+        "severe",
+        "totaled",
+        "engine",
+        "chassis",
+        "frame",
+        "rollover",
+        "fire",
+        "flood",
+        "submerged",
+        "crushed",
+        "destroyed",
+        "hydrolocked",
+        "write-off",
+        "total loss"
+      ],
+      "payout_percent_min": 30,
+      "payout_percent_max": 50,
+      "typical_repair_range": [
+        80000,
+        500000
+      ],
+      "description": "Severe structural/engine damage, total loss"
+    }
+  },
+  "incident_types": {
+    "collision": [
+      "collision",
+      "hit",
+      "crash",
+      "rear-end",
+      "head-on",
+      "side impact",
+      "accident",
+      "rammed",
+      "damaged",
+      "damage",
+      "impact"
+    ],
+    "single_vehicle": [
+      "tree",
+      "pole",
+      "wall",
+      "divider",
+      "reversing",
+      "skid",
+      "ditch",
+      "pothole"
+    ],
+    "theft": [
+      "stolen",
+      "theft",
+      "break-in",
+      "missing"
+    ],
+    "fire": [
+      "fire",
+      "burnt",
+      "electrical short",
+      "short circuit",
+      "flames",
+      "arson"
+    ],
+    "natural_disaster": [
+      "flood",
+      "submerged",
+      "hailstorm",
+      "cyclone",
+      "earthquake",
+      "landslide",
+      "waterlogged"
+    ],
+    "vandalism": [
+      "vandalism",
+      "keyed",
+      "smashed",
+      "intentional damage"
+    ],
+    "hit_and_run": [
+      "hit-and-run",
+      "hit and run",
+      "unknown vehicle",
+      "fled the scene"
+    ]
+  },
+  "risk_score_weights": {
+    "fraud_risk": 0.3,
+    "document_completeness": 0.15,
+    "claim_amount_reasonableness": 0.2,
+    "description_consistency": 0.15,
+    "claim_history": 0.1,
+    "reporting_timeliness": 0.1
+  },
+  "confidence_thresholds": {
+    "high": 0.8,
+    "medium": 0.6,
+    "low": 0.0
+  }
+}

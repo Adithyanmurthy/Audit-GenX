@@ -1,0 +1,1800 @@
+[
+  {
+    "Claim ID": "C1",
+    "Status": "Rejected",
+    "Reason": "Third-Party policy does not cover this claim",
+    "Confidence Score": 0.93,
+    "Damage Level": "minor",
+    "Policy Type": "Third-Party",
+    "Claim Amount": "₹15,000.0",
+    "Estimated Payout": "₹0",
+    "Risk Score": 0,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Send rejection letter with detailed reason and appeal instructions",
+      "Archive claim with full audit trail"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": true,
+          "submitted": 6,
+          "required": 6,
+          "missing": [],
+          "completeness_pct": 100
+        },
+        "reason": "6/6 documents submitted (100%). All required documents present.",
+        "confidence": 0.95,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "collision",
+          "description_length": 86,
+          "claim_id": "C1"
+        },
+        "reason": "Incident classified as 'collision' based on description keyword matching.",
+        "confidence": 0.9,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "minor",
+          "keywords_matched": 3,
+          "typical_repair_range": [
+            2000,
+            15000
+          ],
+          "claim_amount": 15000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as minor (3 keywords matched). Typical repair: ₹2,000-₹15,000. Claimed ₹15,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Third-Party",
+          "covers_own_damage": false,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": false
+        },
+        "reason": "Third-Party policy does NOT cover own damage. No exclusions triggered. Final: Not covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 15000.0,
+          "policy_limit": 500000,
+          "within_limit": true,
+          "utilization_pct": 3.0
+        },
+        "reason": "Claim ₹15,000.0 is 3.0% of policy limit ₹500,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 0,
+          "claims_this_year": 0,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 0,
+          "risk_level": "low",
+          "flags": [],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 0/100 (low). 0 indicator(s) triggered.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 0,
+          "risk_level": "low",
+          "components": {
+            "fraud": 0,
+            "documents": 0,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 3
+          }
+        },
+        "reason": "Overall risk score: 0/100 (low). Fraud:0 Docs:0 Amount:0 Consistency:0 History:0 Timeliness:3.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Rejected",
+        "reason": "Third-Party policy does not cover this claim",
+        "confidence": 0.95,
+        "source": "coverage_validation result"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "estimated_payout": 0,
+          "reason": "Claim rejected"
+        },
+        "reason": "No payout — claim was rejected.",
+        "confidence": 0.95,
+        "source": "decision result"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Send rejection letter with detailed reason and appeal instructions",
+            "Archive claim with full audit trail"
+          ],
+          "count": 2
+        },
+        "reason": "2 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.95,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.9,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.95,
+              "source": "coverage_validation result"
+            },
+            "payout_estimation": {
+              "confidence": 0.95,
+              "source": "decision result"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.022960+00:00"
+  },
+  {
+    "Claim ID": "C2",
+    "Status": "Approved",
+    "Reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+    "Confidence Score": 0.92,
+    "Damage Level": "moderate",
+    "Policy Type": "Comprehensive",
+    "Claim Amount": "₹35,000.0",
+    "Estimated Payout": "₹18,000",
+    "Risk Score": 0,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Proceed with payout processing",
+      "Send approval notification to policyholder",
+      "Archive claim with audit trail for compliance"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": true,
+          "submitted": 6,
+          "required": 6,
+          "missing": [],
+          "completeness_pct": 100
+        },
+        "reason": "6/6 documents submitted (100%). All required documents present.",
+        "confidence": 0.95,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "collision",
+          "description_length": 91,
+          "claim_id": "C2"
+        },
+        "reason": "Incident classified as 'collision' based on description keyword matching.",
+        "confidence": 0.9,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "moderate",
+          "keywords_matched": 5,
+          "typical_repair_range": [
+            15000,
+            80000
+          ],
+          "claim_amount": 35000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as moderate (5 keywords matched). Typical repair: ₹15,000-₹80,000. Claimed ₹35,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Comprehensive",
+          "covers_own_damage": true,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": true
+        },
+        "reason": "Comprehensive policy covers own damage. No exclusions triggered. Final: Covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 35000.0,
+          "policy_limit": 1000000,
+          "within_limit": true,
+          "utilization_pct": 3.5
+        },
+        "reason": "Claim ₹35,000.0 is 3.5% of policy limit ₹1,000,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 1,
+          "claims_this_year": 0,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 0,
+          "risk_level": "low",
+          "flags": [],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 0/100 (low). 0 indicator(s) triggered.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 0,
+          "risk_level": "low",
+          "components": {
+            "fraud": 0,
+            "documents": 0,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 0
+          }
+        },
+        "reason": "Overall risk score: 0/100 (low). Fraud:0 Docs:0 Amount:0 Consistency:0 History:0 Timeliness:0.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Approved",
+        "reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+        "confidence": 0.93,
+        "source": "All prior stages passed"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "damage_level": "moderate",
+          "payout_pct_range": "50-70%",
+          "payout_pct_used": "60%",
+          "gross_payout": 21000,
+          "deductible": 3000,
+          "estimated_net_payout": 18000
+        },
+        "reason": "Damage: moderate → payout range 50-70%, using midpoint 60%. Gross: ₹21,000 - deductible ₹3,000 = Net: ₹18,000.",
+        "confidence": 0.85,
+        "source": "damage_classification payout ranges + deductible from coverage_rules config"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Proceed with payout processing",
+            "Send approval notification to policyholder",
+            "Archive claim with audit trail for compliance"
+          ],
+          "count": 3
+        },
+        "reason": "3 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.95,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.9,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.93,
+              "source": "All prior stages passed"
+            },
+            "payout_estimation": {
+              "confidence": 0.85,
+              "source": "damage_classification payout ranges + deductible from coverage_rules config"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.024253+00:00"
+  },
+  {
+    "Claim ID": "C3",
+    "Status": "Pending",
+    "Reason": "High fraud risk detected — requires manual investigation by senior claims officer.",
+    "Confidence Score": 0.78,
+    "Damage Level": "minor",
+    "Policy Type": "Comprehensive",
+    "Claim Amount": "₹75,000.0",
+    "Estimated Payout": "₹57,000",
+    "Risk Score": 72,
+    "Fraud Risk": "high",
+    "Recommendations": [
+      "Assign to Special Investigation Unit (SIU) for fraud review",
+      "Request additional documentation from claimant",
+      "Request missing documents: FIR / Police Report, Vehicle Registration (RC), Claim Form (signed), Repair Estimate / Bill",
+      "Set 15-day deadline for document submission",
+      "Schedule follow-up review after additional information received",
+      "Flag policyholder profile for enhanced monitoring on future claims"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": false,
+          "submitted": 2,
+          "required": 6,
+          "missing": [
+            "FIR / Police Report",
+            "Vehicle Registration (RC)",
+            "Claim Form (signed)",
+            "Repair Estimate / Bill"
+          ],
+          "completeness_pct": 33
+        },
+        "reason": "2/6 documents submitted (33%). Missing: FIR / Police Report, Vehicle Registration (RC), Claim Form (signed), Repair Estimate / Bill.",
+        "confidence": 0.35,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "unknown",
+          "description_length": 52,
+          "claim_id": "C3"
+        },
+        "reason": "Incident classified as 'unknown' based on description keyword matching.",
+        "confidence": 0.7,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "minor",
+          "keywords_matched": 2,
+          "typical_repair_range": [
+            2000,
+            15000
+          ],
+          "claim_amount": 75000.0,
+          "amount_within_typical_range": false
+        },
+        "reason": "Damage classified as minor (2 keywords matched). Typical repair: ₹2,000-₹15,000. Claimed ₹75,000.0 is outside typical range.",
+        "confidence": 0.75,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Comprehensive",
+          "covers_own_damage": true,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": true
+        },
+        "reason": "Comprehensive policy covers own damage. No exclusions triggered. Final: Covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 75000.0,
+          "policy_limit": 1000000,
+          "within_limit": true,
+          "utilization_pct": 7.5
+        },
+        "reason": "Claim ₹75,000.0 is 7.5% of policy limit ₹1,000,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 5,
+          "claims_this_year": 3,
+          "flags": [
+            "Total past claims (5) exceed threshold (3)",
+            "Claims this year (3) meet/exceed threshold (2)",
+            "Incident occurred only 15 days after policy purchase"
+          ],
+          "risk_flags_count": 3
+        },
+        "reason": "Flags: Total past claims (5) exceed threshold (3); Claims this year (3) meet/exceed threshold (2); Incident occurred only 15 days after policy purchase.",
+        "confidence": 0.65,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 85,
+          "risk_level": "high",
+          "flags": [
+            {
+              "id": "past_claims_exceeded",
+              "detail": "Past claims (5) > 3"
+            },
+            {
+              "id": "high_claim_minor_damage",
+              "detail": "₹75,000.0 for minor damage (threshold ₹25,000)"
+            },
+            {
+              "id": "missing_documents",
+              "detail": "Supporting documents incomplete"
+            },
+            {
+              "id": "multiple_claims_same_year",
+              "detail": "3 claims this year"
+            },
+            {
+              "id": "amount_outside_range",
+              "detail": "Claim amount outside typical repair range for minor damage"
+            }
+          ],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 85/100 (high). 5 indicator(s) triggered. Flags: Past claims (5) > 3; ₹75,000.0 for minor damage (threshold ₹25,000); Supporting documents incomplete; 3 claims this year; Claim amount outside typical repair range for minor damage.",
+        "confidence": 0.85,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": false,
+          "issues": [
+            "Claim ₹75,000.0 outside typical minor repair range ₹2,000-₹15,000"
+          ],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "Inconsistencies: Claim ₹75,000.0 outside typical minor repair range ₹2,000-₹15,000.",
+        "confidence": 0.55,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 72,
+          "risk_level": "high",
+          "components": {
+            "fraud": 85,
+            "documents": 67,
+            "amount_reasonableness": 60,
+            "consistency": 70,
+            "history": 90,
+            "timeliness": 51
+          }
+        },
+        "reason": "Overall risk score: 72/100 (high). Fraud:85 Docs:67 Amount:60 Consistency:70 History:90 Timeliness:51.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Pending",
+        "reason": "High fraud risk detected — requires manual investigation by senior claims officer.",
+        "confidence": 0.82,
+        "source": "fraud_detection + risk_scoring results"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "damage_level": "minor",
+          "payout_pct_range": "70-90%",
+          "payout_pct_used": "80%",
+          "gross_payout": 60000,
+          "deductible": 3000,
+          "estimated_net_payout": 57000
+        },
+        "reason": "Damage: minor → payout range 70-90%, using midpoint 80%. Gross: ₹60,000 - deductible ₹3,000 = Net: ₹57,000.",
+        "confidence": 0.7,
+        "source": "damage_classification payout ranges + deductible from coverage_rules config"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Assign to Special Investigation Unit (SIU) for fraud review",
+            "Request additional documentation from claimant",
+            "Request missing documents: FIR / Police Report, Vehicle Registration (RC), Claim Form (signed), Repair Estimate / Bill",
+            "Set 15-day deadline for document submission",
+            "Schedule follow-up review after additional information received",
+            "Flag policyholder profile for enhanced monitoring on future claims"
+          ],
+          "count": 6
+        },
+        "reason": "6 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.35,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.7,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.75,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.65,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.85,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.55,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.82,
+              "source": "fraud_detection + risk_scoring results"
+            },
+            "payout_estimation": {
+              "confidence": 0.7,
+              "source": "damage_classification payout ranges + deductible from coverage_rules config"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.025587+00:00"
+  },
+  {
+    "Claim ID": "C4",
+    "Status": "Approved",
+    "Reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+    "Confidence Score": 0.92,
+    "Damage Level": "major",
+    "Policy Type": "Comprehensive",
+    "Claim Amount": "₹450,000.0",
+    "Estimated Payout": "₹177,000",
+    "Risk Score": 0,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Proceed with payout processing",
+      "Send approval notification to policyholder",
+      "Archive claim with audit trail for compliance"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": true,
+          "submitted": 6,
+          "required": 6,
+          "missing": [],
+          "completeness_pct": 100
+        },
+        "reason": "6/6 documents submitted (100%). All required documents present.",
+        "confidence": 0.95,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "fire",
+          "description_length": 96,
+          "claim_id": "C4"
+        },
+        "reason": "Incident classified as 'fire' based on description keyword matching.",
+        "confidence": 0.9,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "major",
+          "keywords_matched": 4,
+          "typical_repair_range": [
+            80000,
+            500000
+          ],
+          "claim_amount": 450000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as major (4 keywords matched). Typical repair: ₹80,000-₹500,000. Claimed ₹450,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Comprehensive",
+          "covers_own_damage": true,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": true
+        },
+        "reason": "Comprehensive policy covers own damage. No exclusions triggered. Final: Covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 450000.0,
+          "policy_limit": 1000000,
+          "within_limit": true,
+          "utilization_pct": 45.0
+        },
+        "reason": "Claim ₹450,000.0 is 45.0% of policy limit ₹1,000,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 0,
+          "claims_this_year": 0,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 0,
+          "risk_level": "low",
+          "flags": [],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 0/100 (low). 0 indicator(s) triggered.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 0,
+          "risk_level": "low",
+          "components": {
+            "fraud": 0,
+            "documents": 0,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 0
+          }
+        },
+        "reason": "Overall risk score: 0/100 (low). Fraud:0 Docs:0 Amount:0 Consistency:0 History:0 Timeliness:0.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Approved",
+        "reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+        "confidence": 0.93,
+        "source": "All prior stages passed"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "damage_level": "major",
+          "payout_pct_range": "30-50%",
+          "payout_pct_used": "40%",
+          "gross_payout": 180000,
+          "deductible": 3000,
+          "estimated_net_payout": 177000
+        },
+        "reason": "Damage: major → payout range 30-50%, using midpoint 40%. Gross: ₹180,000 - deductible ₹3,000 = Net: ₹177,000.",
+        "confidence": 0.85,
+        "source": "damage_classification payout ranges + deductible from coverage_rules config"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Proceed with payout processing",
+            "Send approval notification to policyholder",
+            "Archive claim with audit trail for compliance"
+          ],
+          "count": 3
+        },
+        "reason": "3 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.95,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.9,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.93,
+              "source": "All prior stages passed"
+            },
+            "payout_estimation": {
+              "confidence": 0.85,
+              "source": "damage_classification payout ranges + deductible from coverage_rules config"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.027297+00:00"
+  },
+  {
+    "Claim ID": "C5",
+    "Status": "Rejected",
+    "Reason": "Third-Party policy does not cover this claim",
+    "Confidence Score": 0.93,
+    "Damage Level": "moderate",
+    "Policy Type": "Third-Party",
+    "Claim Amount": "₹20,000.0",
+    "Estimated Payout": "₹0",
+    "Risk Score": 0,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Send rejection letter with detailed reason and appeal instructions",
+      "Archive claim with full audit trail"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": true,
+          "submitted": 6,
+          "required": 6,
+          "missing": [],
+          "completeness_pct": 100
+        },
+        "reason": "6/6 documents submitted (100%). All required documents present.",
+        "confidence": 0.95,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "collision",
+          "description_length": 69,
+          "claim_id": "C5"
+        },
+        "reason": "Incident classified as 'collision' based on description keyword matching.",
+        "confidence": 0.9,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "moderate",
+          "keywords_matched": 3,
+          "typical_repair_range": [
+            15000,
+            80000
+          ],
+          "claim_amount": 20000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as moderate (3 keywords matched). Typical repair: ₹15,000-₹80,000. Claimed ₹20,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Third-Party",
+          "covers_own_damage": false,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": false
+        },
+        "reason": "Third-Party policy does NOT cover own damage. No exclusions triggered. Final: Not covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 20000.0,
+          "policy_limit": 500000,
+          "within_limit": true,
+          "utilization_pct": 4.0
+        },
+        "reason": "Claim ₹20,000.0 is 4.0% of policy limit ₹500,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 2,
+          "claims_this_year": 1,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 0,
+          "risk_level": "low",
+          "flags": [],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 0/100 (low). 0 indicator(s) triggered.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 0,
+          "risk_level": "low",
+          "components": {
+            "fraud": 0,
+            "documents": 0,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 3
+          }
+        },
+        "reason": "Overall risk score: 0/100 (low). Fraud:0 Docs:0 Amount:0 Consistency:0 History:0 Timeliness:3.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Rejected",
+        "reason": "Third-Party policy does not cover this claim",
+        "confidence": 0.95,
+        "source": "coverage_validation result"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "estimated_payout": 0,
+          "reason": "Claim rejected"
+        },
+        "reason": "No payout — claim was rejected.",
+        "confidence": 0.95,
+        "source": "decision result"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Send rejection letter with detailed reason and appeal instructions",
+            "Archive claim with full audit trail"
+          ],
+          "count": 2
+        },
+        "reason": "2 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.95,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.9,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.95,
+              "source": "coverage_validation result"
+            },
+            "payout_estimation": {
+              "confidence": 0.95,
+              "source": "decision result"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.029243+00:00"
+  },
+  {
+    "Claim ID": "C6",
+    "Status": "Pending",
+    "Reason": "Documents incomplete (67%). Missing: FIR / Police Report, Repair Estimate / Bill.",
+    "Confidence Score": 0.86,
+    "Damage Level": "moderate",
+    "Policy Type": "Comprehensive",
+    "Claim Amount": "₹18,000.0",
+    "Estimated Payout": "₹7,800",
+    "Risk Score": 10,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Request missing documents: FIR / Police Report, Repair Estimate / Bill",
+      "Set 15-day deadline for document submission",
+      "Schedule follow-up review after additional information received"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": false,
+          "submitted": 4,
+          "required": 6,
+          "missing": [
+            "FIR / Police Report",
+            "Repair Estimate / Bill"
+          ],
+          "completeness_pct": 67
+        },
+        "reason": "4/6 documents submitted (67%). Missing: FIR / Police Report, Repair Estimate / Bill.",
+        "confidence": 0.6,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "unknown",
+          "description_length": 72,
+          "claim_id": "C6"
+        },
+        "reason": "Incident classified as 'unknown' based on description keyword matching.",
+        "confidence": 0.7,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "moderate",
+          "keywords_matched": 3,
+          "typical_repair_range": [
+            15000,
+            80000
+          ],
+          "claim_amount": 18000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as moderate (3 keywords matched). Typical repair: ₹15,000-₹80,000. Claimed ₹18,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Comprehensive",
+          "covers_own_damage": true,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": true
+        },
+        "reason": "Comprehensive policy covers own damage. No exclusions triggered. Final: Covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 18000.0,
+          "policy_limit": 1000000,
+          "within_limit": true,
+          "utilization_pct": 1.8
+        },
+        "reason": "Claim ₹18,000.0 is 1.8% of policy limit ₹1,000,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 0,
+          "claims_this_year": 0,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 15,
+          "risk_level": "low",
+          "flags": [
+            {
+              "id": "missing_documents",
+              "detail": "Supporting documents incomplete"
+            }
+          ],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 15/100 (low). 1 indicator(s) triggered. Flags: Supporting documents incomplete.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 10,
+          "risk_level": "low",
+          "components": {
+            "fraud": 15,
+            "documents": 33,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 3
+          }
+        },
+        "reason": "Overall risk score: 10/100 (low). Fraud:15 Docs:33 Amount:0 Consistency:0 History:0 Timeliness:3.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Pending",
+        "reason": "Documents incomplete (67%). Missing: FIR / Police Report, Repair Estimate / Bill.",
+        "confidence": 0.78,
+        "source": "document_verification result"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "damage_level": "moderate",
+          "payout_pct_range": "50-70%",
+          "payout_pct_used": "60%",
+          "gross_payout": 10800,
+          "deductible": 3000,
+          "estimated_net_payout": 7800
+        },
+        "reason": "Damage: moderate → payout range 50-70%, using midpoint 60%. Gross: ₹10,800 - deductible ₹3,000 = Net: ₹7,800.",
+        "confidence": 0.7,
+        "source": "damage_classification payout ranges + deductible from coverage_rules config"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Request missing documents: FIR / Police Report, Repair Estimate / Bill",
+            "Set 15-day deadline for document submission",
+            "Schedule follow-up review after additional information received"
+          ],
+          "count": 3
+        },
+        "reason": "3 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.6,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.7,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.78,
+              "source": "document_verification result"
+            },
+            "payout_estimation": {
+              "confidence": 0.7,
+              "source": "damage_classification payout ranges + deductible from coverage_rules config"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.031453+00:00"
+  },
+  {
+    "Claim ID": "C7",
+    "Status": "Approved",
+    "Reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+    "Confidence Score": 0.92,
+    "Damage Level": "major",
+    "Policy Type": "Comprehensive",
+    "Claim Amount": "₹380,000.0",
+    "Estimated Payout": "₹149,000",
+    "Risk Score": 0,
+    "Fraud Risk": "low",
+    "Recommendations": [
+      "Proceed with payout processing",
+      "Send approval notification to policyholder",
+      "Archive claim with audit trail for compliance"
+    ],
+    "Audit Log": [
+      {
+        "step": "input_validation",
+        "result": {
+          "valid": true,
+          "errors": [],
+          "fields_checked": 7
+        },
+        "reason": "All 7 input fields validated successfully.",
+        "confidence": 0.95,
+        "source": "Input field type and range checks"
+      },
+      {
+        "step": "document_verification",
+        "result": {
+          "complete": true,
+          "submitted": 6,
+          "required": 6,
+          "missing": [],
+          "completeness_pct": 100
+        },
+        "reason": "6/6 documents submitted (100%). All required documents present.",
+        "confidence": 0.95,
+        "source": "Required documents checklist from config"
+      },
+      {
+        "step": "claim_analysis",
+        "result": {
+          "incident_type": "collision",
+          "description_length": 102,
+          "claim_id": "C7"
+        },
+        "reason": "Incident classified as 'collision' based on description keyword matching.",
+        "confidence": 0.9,
+        "source": "incident_types config + description text"
+      },
+      {
+        "step": "damage_assessment",
+        "result": {
+          "damage_level": "major",
+          "keywords_matched": 4,
+          "typical_repair_range": [
+            80000,
+            500000
+          ],
+          "claim_amount": 380000.0,
+          "amount_within_typical_range": true
+        },
+        "reason": "Damage classified as major (4 keywords matched). Typical repair: ₹80,000-₹500,000. Claimed ₹380,000.0 is within typical range.",
+        "confidence": 0.9,
+        "source": "damage_classification config keywords + typical_repair_range"
+      },
+      {
+        "step": "coverage_validation",
+        "result": {
+          "policy_type": "Comprehensive",
+          "covers_own_damage": true,
+          "exclusions_triggered": [],
+          "excluded": false,
+          "final_covered": true
+        },
+        "reason": "Comprehensive policy covers own damage. No exclusions triggered. Final: Covered.",
+        "confidence": 0.95,
+        "source": "coverage_rules + exclusions config"
+      },
+      {
+        "step": "policy_limit_check",
+        "result": {
+          "claim_amount": 380000.0,
+          "policy_limit": 1000000,
+          "within_limit": true,
+          "utilization_pct": 38.0
+        },
+        "reason": "Claim ₹380,000.0 is 38.0% of policy limit ₹1,000,000. Within limit.",
+        "confidence": 0.95,
+        "source": "policy_limit_inr from coverage_rules config"
+      },
+      {
+        "step": "history_check",
+        "result": {
+          "past_claims": 1,
+          "claims_this_year": 0,
+          "flags": [],
+          "risk_flags_count": 0
+        },
+        "reason": "No history concerns.",
+        "confidence": 0.9,
+        "source": "Claim history fields + fraud_indicators thresholds"
+      },
+      {
+        "step": "fraud_detection",
+        "result": {
+          "fraud_risk_score": 0,
+          "risk_level": "low",
+          "flags": [],
+          "indicators_checked": 8
+        },
+        "reason": "Fraud risk score: 0/100 (low). 0 indicator(s) triggered.",
+        "confidence": 0.92,
+        "source": "fraud_indicators config with weighted scoring"
+      },
+      {
+        "step": "consistency_cross_check",
+        "result": {
+          "consistent": true,
+          "issues": [],
+          "checks_performed": [
+            "amount_vs_damage_range",
+            "incident_vs_policy"
+          ]
+        },
+        "reason": "All cross-checks passed.",
+        "confidence": 0.92,
+        "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+      },
+      {
+        "step": "risk_scoring",
+        "result": {
+          "overall_risk_score": 0,
+          "risk_level": "low",
+          "components": {
+            "fraud": 0,
+            "documents": 0,
+            "amount_reasonableness": 0,
+            "consistency": 0,
+            "history": 0,
+            "timeliness": 0
+          }
+        },
+        "reason": "Overall risk score: 0/100 (low). Fraud:0 Docs:0 Amount:0 Consistency:0 History:0 Timeliness:0.",
+        "confidence": 0.88,
+        "source": "Weighted risk scoring formula from risk_score_weights config"
+      },
+      {
+        "step": "decision",
+        "result": "Approved",
+        "reason": "Claim is covered, documents complete, no fraud indicators, risk is low.",
+        "confidence": 0.93,
+        "source": "All prior stages passed"
+      },
+      {
+        "step": "payout_estimation",
+        "result": {
+          "damage_level": "major",
+          "payout_pct_range": "30-50%",
+          "payout_pct_used": "40%",
+          "gross_payout": 152000,
+          "deductible": 3000,
+          "estimated_net_payout": 149000
+        },
+        "reason": "Damage: major → payout range 30-50%, using midpoint 40%. Gross: ₹152,000 - deductible ₹3,000 = Net: ₹149,000.",
+        "confidence": 0.85,
+        "source": "damage_classification payout ranges + deductible from coverage_rules config"
+      },
+      {
+        "step": "recommendations",
+        "result": {
+          "actions": [
+            "Proceed with payout processing",
+            "Send approval notification to policyholder",
+            "Archive claim with audit trail for compliance"
+          ],
+          "count": 3
+        },
+        "reason": "3 recommended actions generated for claims officer.",
+        "confidence": 0.88,
+        "source": "Decision status + fraud/document/risk results"
+      },
+      {
+        "step": "audit_verification",
+        "result": {
+          "consistent": true,
+          "contradictions": [],
+          "total_steps_audited": 14,
+          "traceability_map": {
+            "input_validation": {
+              "confidence": 0.95,
+              "source": "Input field type and range checks"
+            },
+            "document_verification": {
+              "confidence": 0.95,
+              "source": "Required documents checklist from config"
+            },
+            "claim_analysis": {
+              "confidence": 0.9,
+              "source": "incident_types config + description text"
+            },
+            "damage_assessment": {
+              "confidence": 0.9,
+              "source": "damage_classification config keywords + typical_repair_range"
+            },
+            "coverage_validation": {
+              "confidence": 0.95,
+              "source": "coverage_rules + exclusions config"
+            },
+            "policy_limit_check": {
+              "confidence": 0.95,
+              "source": "policy_limit_inr from coverage_rules config"
+            },
+            "history_check": {
+              "confidence": 0.9,
+              "source": "Claim history fields + fraud_indicators thresholds"
+            },
+            "fraud_detection": {
+              "confidence": 0.92,
+              "source": "fraud_indicators config with weighted scoring"
+            },
+            "consistency_cross_check": {
+              "confidence": 0.92,
+              "source": "Cross-verification of damage assessment, claim amount, incident type, and policy type"
+            },
+            "risk_scoring": {
+              "confidence": 0.88,
+              "source": "Weighted risk scoring formula from risk_score_weights config"
+            },
+            "decision": {
+              "confidence": 0.93,
+              "source": "All prior stages passed"
+            },
+            "payout_estimation": {
+              "confidence": 0.85,
+              "source": "damage_classification payout ranges + deductible from coverage_rules config"
+            },
+            "recommendations": {
+              "confidence": 0.88,
+              "source": "Decision status + fraud/document/risk results"
+            }
+          }
+        },
+        "reason": "All 13 stages are consistent with the final decision. No contradictions found.",
+        "confidence": 0.98,
+        "source": "Cross-verification of all 14 pipeline stages"
+      }
+    ],
+    "Processed At": "2026-04-10T07:44:25.033968+00:00"
+  }
+]
